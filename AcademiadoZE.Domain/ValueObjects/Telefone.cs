@@ -1,14 +1,31 @@
-﻿namespace AcademiadoZE.Domain.ValueObjects;
+﻿using AcademiadoZE.Domain.Common;
+using AcademiadoZE.Domain.Services;
+
+namespace AcademiadoZE.Domain.ValueObjects;
 //Mario Cesar alves Júnior
+
 public record Telefone
 {
     public string Valor { get; }
 
-    public Telefone(string valor)
+    private Telefone(string valor)
     {
-        if (string.IsNullOrWhiteSpace(valor))
-            throw new Exception("TELEFONE_INVALIDO");
-
         Valor = valor;
     }
+
+    public static Result<Telefone> Criar(string? valor)
+    {
+        if (NormalizadoService.TextoVazioOuNulo(valor))
+            return Result<Telefone>.Failure("Telefone", "TELEFONE_OBRIGATORIO");
+
+        var textoLimpo = NormalizadoService.LimparEDigitos(valor);
+
+        
+        if (textoLimpo.Length != 11)
+            return Result<Telefone>.Failure("Telefone", "TELEFONE_DIGITOS");
+
+        return Result<Telefone>.Success(new Telefone(textoLimpo));
+    }
+
+    public override string ToString() => Valor;
 }

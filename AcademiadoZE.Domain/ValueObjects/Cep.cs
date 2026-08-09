@@ -1,14 +1,31 @@
-﻿namespace AcademiadoZE.Domain.ValueObjects;
+﻿using AcademiadoZE.Domain.Common;
+using AcademiadoZE.Domain.Services;
+
+namespace AcademiadoZE.Domain.ValueObjects;
 //Mario Cesar alves Júnior
+
 public record Cep
 {
     public string Valor { get; }
 
-    public Cep(string valor)
+    private Cep(string valor)
     {
-        if (string.IsNullOrWhiteSpace(valor))
-            throw new Exception("CEP_INVALIDO");
-
         Valor = valor;
     }
+
+    public static Result<Cep> Criar(string? valor)
+    {
+        if (NormalizadoService.TextoVazioOuNulo(valor))
+            return Result<Cep>.Failure("Cep", "CEP_OBRIGATORIO");
+
+       
+        var textoLimpo = NormalizadoService.LimparEDigitos(valor);
+
+        if (textoLimpo.Length != 8)
+            return Result<Cep>.Failure("Cep", "CEP_DIGITOS");
+
+        return Result<Cep>.Success(new Cep(textoLimpo));
+    }
+
+    public override string ToString() => Valor;
 }
