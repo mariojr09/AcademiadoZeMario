@@ -10,7 +10,7 @@ internal static class TestData
     internal static Logradouro LogradouroValido(int id = 1) =>
         Logradouro.Criar(id, "01001-000", "Brasil", "SP", "São Paulo", "Sé", "Praça da Sé").Value!;
 
-    internal static Arquivo ArquivoValido() => Arquivo.Criar("laudo.pdf", "/docs/laudo.pdf").Value!;
+    internal static Arquivo ArquivoValido() => Arquivo.Criar(new byte[] {1,2,3,4}).Value!;
 
     internal static Aluno AlunoValido(int id = 1) =>
         Aluno.Criar(id, "Maria Silva", "529.982.247-25", new DateOnly(2000, 1, 1),

@@ -100,7 +100,11 @@ public static class DbProvider
 
         var parameter = command.CreateParameter();
         parameter.ParameterName = parameterName;
-        parameter.Value = value ?? DBNull.Value;
+        parameter.Value = value switch
+        {
+            DateOnly date => date.ToDateTime(TimeOnly.MinValue),
+            _ => value ?? DBNull.Value
+        };
 
         command.Parameters.Add(parameter);
     }

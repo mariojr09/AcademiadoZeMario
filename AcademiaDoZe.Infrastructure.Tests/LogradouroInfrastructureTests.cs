@@ -48,7 +48,7 @@ public class LogradouroInfrastructureTests : TestBase
             cep,
             "Brasil",
             "SC",
-            "SQLite",
+            "Mysql",
             "Alves",
             "Mario");
 
