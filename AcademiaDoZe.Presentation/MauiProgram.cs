@@ -7,6 +7,7 @@ using AcademiaDoZe.Presentation.Pages;
 using Microsoft.Extensions.Logging;
 
 namespace AcademiaDoZe.Presentation;
+//Mario Cesar Alves Júnior
 
 public static class MauiProgram
 {

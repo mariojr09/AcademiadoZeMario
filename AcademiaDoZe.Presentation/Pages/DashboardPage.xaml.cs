@@ -1,6 +1,7 @@
 using AcademiaDoZe.Application.Interfaces;
 
 namespace AcademiaDoZe.Presentation.Pages;
+//Mario Cesar Alves Júnior
 
 public partial class DashboardPage : ContentPage
 {

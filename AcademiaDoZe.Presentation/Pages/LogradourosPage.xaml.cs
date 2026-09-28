@@ -4,6 +4,7 @@ using AcademiaDoZe.Application.Interfaces;
 using AcademiaDoZe.Presentation.Helpers;
 
 namespace AcademiaDoZe.Presentation.Pages;
+//Mario Cesar Alves Júnior
 
 public partial class LogradourosPage : ContentPage
 {
