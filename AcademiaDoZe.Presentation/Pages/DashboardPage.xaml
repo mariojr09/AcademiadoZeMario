@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AcademiaDoZe.Presentation.Pages.DashboardPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Dashboard"
+    BackgroundColor="#F4F7FA">
+
+    <ScrollView>
+        <Grid
+            Padding="28,22,28,30"
+            RowDefinitions="Auto,Auto,Auto"
+            RowSpacing="18"
+            MaximumWidthRequest="1120"
+            HorizontalOptions="Fill">
+
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+                <VerticalStackLayout Spacing="3">
+                    <Label
+                        Text="DASHBOARD"
+                        FontFamily="OpenSansSemibold"
+                        FontSize="11"
+                        CharacterSpacing="1.8"
+                        TextColor="#C48717" />
+                    <Label
+                        Text="Olá, Mario!"
+                        FontFamily="OpenSansSemibold"
+                        FontSize="28"
+                        TextColor="#081D30" />
+                    <Label
+                        Text="Bem-vindo à visão geral da Academia do Zé."
+                        FontFamily="OpenSansRegular"
+                        FontSize="13"
+                        TextColor="#60758A" />
+                </VerticalStackLayout>
+
+                <Border
+                    Grid.Column="1"
+                    Padding="14,8"
+                    BackgroundColor="#FFF7E6"
+                    Stroke="#F2D08A"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    VerticalOptions="Center">
+                    <Label
+                        Text="GESTÃO DE ENDEREÇOS"
+                        FontFamily="OpenSansSemibold"
+                        FontSize="10"
+                        CharacterSpacing="1"
+                        TextColor="#9A6710" />
+                </Border>
+            </Grid>
+
+            <Grid
+                x:Name="OverviewGrid"
+                Grid.Row="1"
+                ColumnDefinitions="3*,2*"
+                RowDefinitions="Auto"
+                ColumnSpacing="18"
+                RowSpacing="18">
+
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="WindowWidths">
+                        <VisualState x:Name="Narrow">
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowWidth="0" />
+                            </VisualState.StateTriggers>
+                            <VisualState.Setters>
+                                <Setter Property="ColumnDefinitions" Value="*" />
+                                <Setter Property="RowDefinitions" Value="Auto,Auto" />
+                                <Setter TargetName="LogoCard" Property="Grid.Column" Value="0" />
+                                <Setter TargetName="LogoCard" Property="Grid.Row" Value="0" />
+                                <Setter TargetName="TotalCard" Property="Grid.Column" Value="0" />
+                                <Setter TargetName="TotalCard" Property="Grid.Row" Value="1" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Wide">
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowWidth="820" />
+                            </VisualState.StateTriggers>
+                            <VisualState.Setters>
+                                <Setter Property="ColumnDefinitions" Value="3*,2*" />
+                                <Setter Property="RowDefinitions" Value="Auto" />
+                                <Setter TargetName="LogoCard" Property="Grid.Column" Value="0" />
+                                <Setter TargetName="LogoCard" Property="Grid.Row" Value="0" />
+                                <Setter TargetName="TotalCard" Property="Grid.Column" Value="1" />
+                                <Setter TargetName="TotalCard" Property="Grid.Row" Value="0" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+
+                <Border
+                    x:Name="LogoCard"
+                    BackgroundColor="#071C2E"
+                    Stroke="#173A55"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 18"
+                    Padding="0">
+                    <Border.Shadow>
+                        <Shadow Brush="#19051A2A" Offset="0,4" Radius="12" Opacity="0.75" />
+                    </Border.Shadow>
+                    <Grid RowDefinitions="Auto,Auto">
+                        <Image
+                            Source="logo.png"
+                            HeightRequest="238"
+                            Margin="12,8"
+                            Aspect="AspectFit"
+                            HorizontalOptions="Fill"
+                            SemanticProperties.Description="Logo da Academia do Zé com o nome Mario Cesar Alves Júnior" />
+
+                        <Grid
+                            Grid.Row="1"
+                            Padding="22,13"
+                            ColumnDefinitions="Auto,*"
+                            ColumnSpacing="12"
+                            BackgroundColor="#0B263D">
+                            <BoxView
+                                WidthRequest="4"
+                                HeightRequest="35"
+                                CornerRadius="2"
+                                Color="#E6A52E" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                                <Label
+                                    Text="Mario Cesar Alves Júnior"
+                                    FontFamily="OpenSansSemibold"
+                                    FontSize="18"
+                                    TextColor="#FFFFFF" />
+                                <Label
+                                    Text="Academia do Zé • Desenvolvimento de Sistemas"
+                                    FontFamily="OpenSansRegular"
+                                    FontSize="11"
+                                    TextColor="#C9D6E0" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <Border
+                    x:Name="TotalCard"
+                    Grid.Column="1"
+                    BackgroundColor="#FFFFFF"
+                    Stroke="#D7E1E9"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 18"
+                    Padding="22">
+                    <Border.Shadow>
+                        <Shadow Brush="#16051A2A" Offset="0,4" Radius="12" Opacity="0.7" />
+                    </Border.Shadow>
+                    <Grid RowDefinitions="Auto,*,Auto" RowSpacing="14">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Spacing="2">
+                                <Label
+                                    Text="LOGRADOUROS"
+                                    FontFamily="OpenSansSemibold"
+                                    FontSize="10"
+                                    CharacterSpacing="1.5"
+                                    TextColor="#A36E12" />
+                                <Label
+                                    Text="Total cadastrado"
+                                    FontFamily="OpenSansRegular"
+                                    FontSize="13"
+                                    TextColor="#60758A" />
+                            </VerticalStackLayout>
+                            <Border
+                                Grid.Column="1"
+                                Padding="10,5"
+                                BackgroundColor="#FFF4DA"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 10">
+                                <Label
+                                    Text="ATUALIZADO"
+                                    FontFamily="OpenSansSemibold"
+                                    FontSize="9"
+                                    CharacterSpacing="0.8"
+                                    TextColor="#9A6710" />
+                            </Border>
+                        </Grid>
+
+                        <VerticalStackLayout Grid.Row="1" Spacing="0" VerticalOptions="Center">
+                            <ActivityIndicator
+                                x:Name="LoadingIndicator"
+                                IsRunning="False"
+                                IsVisible="False"
+                                HorizontalOptions="Start"
+                                Color="#D69520" />
+                            <Label
+                                x:Name="TotalLogradourosLabel"
+                                Text="--"
+                                FontFamily="OpenSansSemibold"
+                                FontSize="58"
+                                LineHeight="0.95"
+                                TextColor="#081D30"
+                                SemanticProperties.Description="Total de logradouros cadastrados" />
+                            <Label
+                                Text="Total de Logradouros"
+                                FontFamily="OpenSansSemibold"
+                                FontSize="14"
+                                TextColor="#334E63" />
+                            <Label
+                                x:Name="StatusLabel"
+                                Margin="0,6,0,0"
+                                FontFamily="OpenSansRegular"
+                                FontSize="11"
+                                TextColor="#B42318"
+                                IsVisible="False" />
+                        </VerticalStackLayout>
+
+                        <Button
+                            Grid.Row="2"
+                            Text="Acessar Logradouros"
+                            BackgroundColor="#E6A52E"
+                            TextColor="#081D30"
+                            FontFamily="OpenSansSemibold"
+                            FontSize="14"
+                            CornerRadius="11"
+                            Padding="18,12"
+                            MinimumHeightRequest="46"
+                            HorizontalOptions="Fill"
+                            Clicked="OnAcessarLogradourosClicked"
+                            SemanticProperties.Hint="Abre a página de Logradouros" />
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <Border
+                Grid.Row="2"
+                BackgroundColor="#FFFFFF"
+                Stroke="#D7E1E9"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 16"
+                Padding="18,14">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                    <Border
+                        WidthRequest="42"
+                        HeightRequest="42"
+                        BackgroundColor="#FFF4DA"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 12">
+                        <Label
+                            Text="AZ"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            FontFamily="OpenSansSemibold"
+                            FontSize="13"
+                            TextColor="#9A6710" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                        <Label
+                            Text="Acesso rápido"
+                            FontFamily="OpenSansSemibold"
+                            FontSize="16"
+                            TextColor="#081D30" />
+                        <Label
+                            Text="Consulte os endereços cadastrados no sistema."
+                            FontFamily="OpenSansRegular"
+                            FontSize="12"
+                            TextColor="#60758A" />
+                    </VerticalStackLayout>
+                    <Button
+                        Grid.Column="2"
+                        Text="Ver Logradouros"
+                        BackgroundColor="#EAF0F5"
+                        TextColor="#0B263D"
+                        FontFamily="OpenSansSemibold"
+                        FontSize="13"
+                        CornerRadius="10"
+                        Padding="16,10"
+                        MinimumHeightRequest="42"
+                        VerticalOptions="Center"
+                        Clicked="OnAcessarLogradourosClicked" />
+                </Grid>
+            </Border>
+        </Grid>
+    </ScrollView>
+</ContentPage>

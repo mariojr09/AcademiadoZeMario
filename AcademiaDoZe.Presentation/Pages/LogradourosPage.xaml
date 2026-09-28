@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AcademiaDoZe.Presentation.Pages.LogradourosPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dto="clr-namespace:AcademiaDoZe.Application.DTOs;assembly=AcademiaDoZe.Application"
+    Title="Logradouros"
+    BackgroundColor="#F4F7FA">
+
+    <Grid
+        Padding="26,20,26,24"
+        RowDefinitions="Auto,Auto,Auto,*"
+        RowSpacing="14"
+        MaximumWidthRequest="1180"
+        HorizontalOptions="Fill">
+
+        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+            <VerticalStackLayout Spacing="2">
+                <Label
+                    Text="GESTÃO DE ENDEREÇOS"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="10"
+                    CharacterSpacing="1.7"
+                    TextColor="#A36E12" />
+                <Label
+                    Text="Logradouros"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="28"
+                    TextColor="#081D30" />
+                <Label
+                    Text="Consulte, cadastre e mantenha os endereços da academia."
+                    FontFamily="OpenSansRegular"
+                    FontSize="12"
+                    TextColor="#60758A" />
+            </VerticalStackLayout>
+
+            <Button
+                Grid.Column="1"
+                Text="Novo Logradouro"
+                BackgroundColor="#E6A52E"
+                TextColor="#081D30"
+                FontFamily="OpenSansSemibold"
+                FontSize="13"
+                CornerRadius="11"
+                Padding="18,11"
+                MinimumHeightRequest="44"
+                VerticalOptions="Center"
+                Clicked="OnNovoLogradouroClicked" />
+        </Grid>
+
+        <Border
+            Grid.Row="1"
+            Padding="14"
+            BackgroundColor="#FFFFFF"
+            Stroke="#D7E1E9"
+            StrokeThickness="1"
+            StrokeShape="RoundRectangle 15">
+            <FlexLayout
+                Direction="Row"
+                Wrap="Wrap"
+                AlignItems="Center"
+                JustifyContent="SpaceBetween">
+                <SearchBar
+                    x:Name="PesquisaSearchBar"
+                    Placeholder="Pesquisar por CEP, nome, bairro ou cidade"
+                    PlaceholderColor="#7A8FA1"
+                    TextColor="#081D30"
+                    BackgroundColor="#F1F5F8"
+                    FontFamily="OpenSansRegular"
+                    FontSize="13"
+                    HeightRequest="46"
+                    MinimumWidthRequest="300"
+                    FlexLayout.Basis="65%"
+                    FlexLayout.Grow="1"
+                    TextChanged="OnPesquisaTextChanged" />
+                <Button
+                    Text="Atualizar lista"
+                    Margin="10,0,0,0"
+                    BackgroundColor="#EAF0F5"
+                    TextColor="#0B263D"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="12"
+                    CornerRadius="10"
+                    Padding="16,10"
+                    MinimumHeightRequest="42"
+                    Clicked="OnAtualizarClicked" />
+            </FlexLayout>
+        </Border>
+
+        <Grid Grid.Row="2" ColumnDefinitions="*,Auto">
+            <Label
+                x:Name="QuantidadeLabel"
+                Text="0 registros encontrados"
+                FontFamily="OpenSansSemibold"
+                FontSize="12"
+                TextColor="#334E63"
+                VerticalOptions="Center" />
+            <ActivityIndicator
+                x:Name="LoadingIndicator"
+                Grid.Column="1"
+                IsRunning="False"
+                IsVisible="False"
+                Color="#D69520"
+                WidthRequest="24"
+                HeightRequest="24" />
+        </Grid>
+
+        <CollectionView
+            x:Name="LogradourosCollection"
+            Grid.Row="3"
+            SelectionMode="None"
+            VerticalScrollBarVisibility="Always">
+            <CollectionView.EmptyView>
+                <Border
+                    Margin="0,12"
+                    Padding="30"
+                    BackgroundColor="#FFFFFF"
+                    Stroke="#D7E1E9"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 16">
+                    <VerticalStackLayout Spacing="7" HorizontalOptions="Center">
+                        <Label
+                            Text="Nenhum logradouro encontrado"
+                            FontFamily="OpenSansSemibold"
+                            FontSize="17"
+                            TextColor="#081D30"
+                            HorizontalTextAlignment="Center" />
+                        <Label
+                            Text="Cadastre um novo endereço ou ajuste os termos da pesquisa."
+                            FontFamily="OpenSansRegular"
+                            FontSize="12"
+                            TextColor="#60758A"
+                            HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </Border>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="dto:LogradouroDto">
+                    <Border
+                        Margin="0,0,0,10"
+                        Padding="17,14"
+                        BackgroundColor="#FFFFFF"
+                        Stroke="#D7E1E9"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 14">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="18">
+                            <VerticalStackLayout Spacing="5">
+                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                    <Border
+                                        Padding="9,4"
+                                        BackgroundColor="#FFF4DA"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 8">
+                                        <Label
+                                            Text="{Binding Cep}"
+                                            FontFamily="OpenSansSemibold"
+                                            FontSize="11"
+                                            TextColor="#9A6710" />
+                                    </Border>
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="{Binding Nome}"
+                                        FontFamily="OpenSansSemibold"
+                                        FontSize="16"
+                                        TextColor="#081D30"
+                                        LineBreakMode="TailTruncation"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                                <Label
+                                    FontFamily="OpenSansRegular"
+                                    FontSize="12"
+                                    TextColor="#526B7E">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Bairro}" />
+                                            <Span Text="  •  " />
+                                            <Span Text="{Binding Cidade}" />
+                                            <Span Text=" / " />
+                                            <Span Text="{Binding Estado}" />
+                                            <Span Text="  •  " />
+                                            <Span Text="{Binding Pais}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </VerticalStackLayout>
+
+                            <HorizontalStackLayout Grid.Column="1" Spacing="8" VerticalOptions="Center">
+                                <Button
+                                    Text="Editar"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="#EAF0F5"
+                                    TextColor="#0B263D"
+                                    FontFamily="OpenSansSemibold"
+                                    FontSize="11"
+                                    CornerRadius="9"
+                                    Padding="14,8"
+                                    MinimumHeightRequest="38"
+                                    Clicked="OnEditarClicked" />
+                                <Button
+                                    Text="Excluir"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="#FFF0EE"
+                                    TextColor="#B42318"
+                                    FontFamily="OpenSansSemibold"
+                                    FontSize="11"
+                                    CornerRadius="9"
+                                    Padding="14,8"
+                                    MinimumHeightRequest="38"
+                                    Clicked="OnExcluirClicked" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="900" height="520" viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#147D92"/><stop offset="1" stop-color="#102A43"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF9B78"/><stop offset="1" stop-color="#F26B4A"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="520" fill="url(#bg)"/>
+  <circle cx="90" cy="78" r="180" fill="#FFFFFF" opacity="0.045"/>
+  <circle cx="830" cy="440" r="230" fill="#FFFFFF" opacity="0.055"/>
+  <path d="M0 410 C190 340 335 470 520 396 C680 332 760 354 900 300 V520 H0Z" fill="#0B2239" opacity="0.52"/>
+  <g transform="translate(116 78)">
+    <circle cx="174" cy="154" r="136" fill="#DDF3F5" opacity="0.18"/>
+    <circle cx="174" cy="138" r="84" fill="#F4C7A1"/>
+    <path d="M91 132 C96 48 250 25 258 140 C226 112 190 92 107 118Z" fill="#173F5F"/>
+    <path d="M113 234 C137 211 211 209 236 234 C277 270 290 330 291 384 H57 C58 326 72 270 113 234Z" fill="url(#accent)"/>
+    <path d="M139 217 C151 241 197 242 210 217 L222 239 C199 270 150 270 127 239Z" fill="#F4C7A1"/>
+    <circle cx="143" cy="143" r="6" fill="#102A43"/><circle cx="207" cy="143" r="6" fill="#102A43"/>
+    <path d="M150 181 C166 194 187 194 201 180" fill="none" stroke="#9B5543" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(450 145)">
+    <text x="0" y="0" fill="#BCCCDC" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="4">PROJETO ACADÊMICO</text>
+    <text x="0" y="72" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="48" font-weight="700">Mario Cesar</text>
+    <text x="0" y="130" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="48" font-weight="700">Alves Júnior</text>
+    <rect x="0" y="164" width="92" height="7" rx="3.5" fill="#F26B4A"/>
+    <text x="0" y="217" fill="#D9E2EC" font-family="Arial, sans-serif" font-size="21">Academia do Zé</text>
+  </g>
+</svg>

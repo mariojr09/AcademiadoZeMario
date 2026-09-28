@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AcademiaDoZe.Presentation.Pages.LogradouroFormPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Logradouro"
+    BackgroundColor="#F4F7FA">
+
+    <ScrollView>
+        <Grid
+            Padding="26,20,26,32"
+            RowDefinitions="Auto,Auto"
+            RowSpacing="16"
+            MaximumWidthRequest="760"
+            HorizontalOptions="Center">
+
+            <VerticalStackLayout Spacing="3">
+                <Label
+                    Text="GESTÃO DE ENDEREÇOS"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="10"
+                    CharacterSpacing="1.7"
+                    TextColor="#A36E12" />
+                <Label
+                    x:Name="TituloLabel"
+                    Text="Novo Logradouro"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="27"
+                    TextColor="#081D30" />
+                <Label
+                    x:Name="DescricaoLabel"
+                    Text="Preencha os dados para cadastrar um endereço."
+                    FontFamily="OpenSansRegular"
+                    FontSize="12"
+                    TextColor="#60758A" />
+            </VerticalStackLayout>
+
+            <Border
+                Grid.Row="1"
+                Padding="24,20"
+                BackgroundColor="#FFFFFF"
+                Stroke="#D7E1E9"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 18">
+                <Border.Shadow>
+                    <Shadow Brush="#16051A2A" Offset="0,4" Radius="12" Opacity="0.7" />
+                </Border.Shadow>
+                <VerticalStackLayout Spacing="14">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="CEP *" FontFamily="OpenSansSemibold" FontSize="12" TextColor="#334E63" />
+                        <Border BackgroundColor="#F6F8FA" Stroke="#CCD8E1" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 10" Padding="12,2">
+                            <Entry
+                                x:Name="CepEntry"
+                                Placeholder="00000-000"
+                                PlaceholderColor="#8A9CAA"
+                                TextColor="#081D30"
+                                BackgroundColor="Transparent"
+                                FontFamily="OpenSansRegular"
+                                FontSize="14"
+                                Keyboard="Numeric"
+                                MaxLength="9"
+                                ReturnType="Next"
+                                ClearButtonVisibility="WhileEditing"
+                                TextChanged="OnCepTextChanged" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Nome do Logradouro *" FontFamily="OpenSansSemibold" FontSize="12" TextColor="#334E63" />
+                        <Border BackgroundColor="#F6F8FA" Stroke="#CCD8E1" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 10" Padding="12,2">
+                            <Entry
+                                x:Name="NomeEntry"
+                                Placeholder="Ex.: Mario Cesar Alves Júnior"
+                                PlaceholderColor="#8A9CAA"
+                                TextColor="#081D30"
+                                BackgroundColor="Transparent"
+                                FontFamily="OpenSansRegular"
+                                FontSize="14"
+                                ReturnType="Next"
+                                ClearButtonVisibility="WhileEditing" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Bairro *" FontFamily="OpenSansSemibold" FontSize="12" TextColor="#334E63" />
+                        <Border BackgroundColor="#F6F8FA" Stroke="#CCD8E1" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 10" Padding="12,2">
+                            <Entry
+                                x:Name="BairroEntry"
+                                Placeholder="Ex.: Centro"
+                                PlaceholderColor="#8A9CAA"
+                                TextColor="#081D30"
+                                BackgroundColor="Transparent"
+                                FontFamily="OpenSansRegular"
+                                FontSize="14"
+                                ReturnType="Next"
+                                ClearButtonVisibility="WhileEditing" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Cidade *" FontFamily="OpenSansSemibold" FontSize="12" TextColor="#334E63" />
+                        <Border BackgroundColor="#F6F8FA" Stroke="#CCD8E1" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 10" Padding="12,2">
+                            <Entry
+                                x:Name="CidadeEntry"
+                                Placeholder="Ex.: Florianópolis"
+                                PlaceholderColor="#8A9CAA"
+                                TextColor="#081D30"
+                                BackgroundColor="Transparent"
+                                FontFamily="OpenSansRegular"
+                                FontSize="14"
+                                ReturnType="Next"
+                                ClearButtonVisibility="WhileEditing" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Estado *" FontFamily="OpenSansSemibold" FontSize="12" TextColor="#334E63" />
+                            <Border BackgroundColor="#F6F8FA" Stroke="#CCD8E1" StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 10" Padding="12,2">
+                                <Entry
+                                    x:Name="EstadoEntry"
+                                    Placeholder="Ex.: SC"
+                                    PlaceholderColor="#8A9CAA"
+                                    TextColor="#081D30"
+                                    BackgroundColor="Transparent"
+                                    FontFamily="OpenSansRegular"
+                                    FontSize="14"
+                                    ReturnType="Next"
+                                    ClearButtonVisibility="WhileEditing" />
+                            </Border>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label Text="País *" FontFamily="OpenSansSemibold" FontSize="12" TextColor="#334E63" />
+                            <Border BackgroundColor="#F6F8FA" Stroke="#CCD8E1" StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 10" Padding="12,2">
+                                <Entry
+                                    x:Name="PaisEntry"
+                                    Placeholder="Ex.: Brasil"
+                                    PlaceholderColor="#8A9CAA"
+                                    TextColor="#081D30"
+                                    BackgroundColor="Transparent"
+                                    FontFamily="OpenSansRegular"
+                                    FontSize="14"
+                                    ReturnType="Done"
+                                    ClearButtonVisibility="WhileEditing" />
+                            </Border>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Label
+                        x:Name="ValidationLabel"
+                        FontFamily="OpenSansSemibold"
+                        FontSize="11"
+                        TextColor="#B42318"
+                        IsVisible="False" />
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12" Margin="0,4,0,0">
+                        <Button
+                            Text="Cancelar"
+                            BackgroundColor="#EAF0F5"
+                            TextColor="#0B263D"
+                            FontFamily="OpenSansSemibold"
+                            FontSize="13"
+                            CornerRadius="10"
+                            Padding="16,11"
+                            MinimumHeightRequest="44"
+                            Clicked="OnCancelarClicked" />
+                        <Button
+                            x:Name="SalvarButton"
+                            Grid.Column="1"
+                            Text="Salvar Logradouro"
+                            BackgroundColor="#E6A52E"
+                            TextColor="#081D30"
+                            FontFamily="OpenSansSemibold"
+                            FontSize="13"
+                            CornerRadius="10"
+                            Padding="16,11"
+                            MinimumHeightRequest="44"
+                            Clicked="OnSalvarClicked" />
+                    </Grid>
+
+                    <ActivityIndicator
+                        x:Name="LoadingIndicator"
+                        IsRunning="False"
+                        IsVisible="False"
+                        Color="#D69520"
+                        HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </ScrollView>
+</ContentPage>

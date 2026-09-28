@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="AcademiaDoZe.Presentation.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Academia do Zé"
+    FlyoutBehavior="Flyout"
+    FlyoutBackgroundColor="{StaticResource Navy900}"
+    FlyoutWidth="290"
+    Shell.BackgroundColor="{StaticResource Navy900}"
+    Shell.ForegroundColor="{StaticResource White}"
+    Shell.UnselectedColor="{StaticResource Slate300}"
+    Shell.TitleColor="{StaticResource White}">
+
+    <Shell.FlyoutHeader>
+        <Grid Padding="24,34,24,24" RowDefinitions="Auto,Auto,Auto">
+            <Border
+                WidthRequest="54" HeightRequest="54"
+                HorizontalOptions="Start"
+                BackgroundColor="{StaticResource Coral500}"
+                StrokeThickness="0" StrokeShape="RoundRectangle 16">
+                <Label
+                    Text="AZ" HorizontalOptions="Center" VerticalOptions="Center"
+                    FontFamily="OpenSansSemibold" FontSize="20"
+                    TextColor="{StaticResource White}" />
+            </Border>
+            <Label
+                Grid.Row="1" Margin="0,16,0,0"
+                Text="ACADEMIA DO ZÉ" FontFamily="OpenSansSemibold"
+                FontSize="18" CharacterSpacing="1.4"
+                TextColor="{StaticResource White}" />
+            <Label
+                Grid.Row="2" Margin="0,4,0,0"
+                Text="Gestão simples. Evolução constante."
+                FontSize="12" TextColor="{StaticResource Slate300}" />
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <FlyoutItem Title="Dashboard" Route="dashboard">
+        <ShellContent x:Name="DashboardShellContent" Title="Dashboard" Route="dashboard-page" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Logradouros" Route="logradouros">
+        <ShellContent x:Name="LogradourosShellContent" Title="Logradouros" Route="logradouros-page" />
+    </FlyoutItem>
+</Shell>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Color x:Key="White">#FFFFFF</Color>
+    <Color x:Key="Navy900">#102A43</Color>
+    <Color x:Key="Navy800">#173F5F</Color>
+    <Color x:Key="Blue600">#147D92</Color>
+    <Color x:Key="Blue100">#DDF3F5</Color>
+    <Color x:Key="Coral500">#F26B4A</Color>
+    <Color x:Key="Coral100">#FFF0EB</Color>
+    <Color x:Key="Slate700">#334E68</Color>
+    <Color x:Key="Slate500">#627D98</Color>
+    <Color x:Key="Slate300">#BCCCDC</Color>
+    <Color x:Key="Slate200">#D9E2EC</Color>
+    <Color x:Key="Slate100">#F0F4F8</Color>
+    <Color x:Key="Canvas">#F7F9FC</Color>
+    <Color x:Key="Danger">#C53030</Color>
+</ResourceDictionary>
