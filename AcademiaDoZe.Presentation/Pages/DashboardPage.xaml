@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Dashboard"
-    BackgroundColor="#F4F7FA">
+    BackgroundColor="{AppThemeBinding Light=#F4F7FA, Dark=#101820}">
 
     <ScrollView>
         <Grid
@@ -14,43 +14,52 @@
             MaximumWidthRequest="1120"
             HorizontalOptions="Fill">
 
+            <!-- Cabeçalho -->
             <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+
                 <VerticalStackLayout Spacing="3">
+
                     <Label
                         Text="DASHBOARD"
                         FontFamily="OpenSansSemibold"
                         FontSize="11"
                         CharacterSpacing="1.8"
-                        TextColor="#C48717" />
+                        TextColor="#D99516" />
+
                     <Label
                         Text="Olá, Mario!"
                         FontFamily="OpenSansSemibold"
                         FontSize="28"
-                        TextColor="#081D30" />
+                        TextColor="{AppThemeBinding Light=#081D30, Dark=White}" />
+
                     <Label
                         Text="Bem-vindo à visão geral da Academia do Zé."
                         FontFamily="OpenSansRegular"
                         FontSize="13"
-                        TextColor="#60758A" />
+                        TextColor="{AppThemeBinding Light=#60758A, Dark=#B8C7D4}" />
+
                 </VerticalStackLayout>
 
                 <Border
                     Grid.Column="1"
                     Padding="14,8"
-                    BackgroundColor="#FFF7E6"
-                    Stroke="#F2D08A"
+                    BackgroundColor="{AppThemeBinding Light=#FFF7E6, Dark=#3A321F}"
+                    Stroke="{AppThemeBinding Light=#F2D08A, Dark=#806321}"
                     StrokeThickness="1"
                     StrokeShape="RoundRectangle 12"
                     VerticalOptions="Center">
+
                     <Label
                         Text="GESTÃO DE ENDEREÇOS"
                         FontFamily="OpenSansSemibold"
                         FontSize="10"
                         CharacterSpacing="1"
-                        TextColor="#9A6710" />
+                        TextColor="{AppThemeBinding Light=#9A6710, Dark=#F1B84B}" />
+
                 </Border>
             </Grid>
 
+            <!-- Cards principais -->
             <Grid
                 x:Name="OverviewGrid"
                 Grid.Row="1"
@@ -61,10 +70,12 @@
 
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroup x:Name="WindowWidths">
+
                         <VisualState x:Name="Narrow">
                             <VisualState.StateTriggers>
                                 <AdaptiveTrigger MinWindowWidth="0" />
                             </VisualState.StateTriggers>
+
                             <VisualState.Setters>
                                 <Setter Property="ColumnDefinitions" Value="*" />
                                 <Setter Property="RowDefinitions" Value="Auto,Auto" />
@@ -74,10 +85,12 @@
                                 <Setter TargetName="TotalCard" Property="Grid.Row" Value="1" />
                             </VisualState.Setters>
                         </VisualState>
+
                         <VisualState x:Name="Wide">
                             <VisualState.StateTriggers>
                                 <AdaptiveTrigger MinWindowWidth="820" />
                             </VisualState.StateTriggers>
+
                             <VisualState.Setters>
                                 <Setter Property="ColumnDefinitions" Value="3*,2*" />
                                 <Setter Property="RowDefinitions" Value="Auto" />
@@ -87,9 +100,11 @@
                                 <Setter TargetName="TotalCard" Property="Grid.Row" Value="0" />
                             </VisualState.Setters>
                         </VisualState>
+
                     </VisualStateGroup>
                 </VisualStateManager.VisualStateGroups>
 
+                <!-- Logo -->
                 <Border
                     x:Name="LogoCard"
                     BackgroundColor="#071C2E"
@@ -97,10 +112,17 @@
                     StrokeThickness="1"
                     StrokeShape="RoundRectangle 18"
                     Padding="0">
+
                     <Border.Shadow>
-                        <Shadow Brush="#19051A2A" Offset="0,4" Radius="12" Opacity="0.75" />
+                        <Shadow
+                            Brush="#19051A2A"
+                            Offset="0,4"
+                            Radius="12"
+                            Opacity="0.75" />
                     </Border.Shadow>
+
                     <Grid RowDefinitions="Auto,Auto">
+
                         <Image
                             Source="logo.png"
                             HeightRequest="238"
@@ -115,95 +137,128 @@
                             ColumnDefinitions="Auto,*"
                             ColumnSpacing="12"
                             BackgroundColor="#0B263D">
+
                             <BoxView
                                 WidthRequest="4"
                                 HeightRequest="35"
                                 CornerRadius="2"
                                 Color="#E6A52E" />
-                            <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+
+                            <VerticalStackLayout
+                                Grid.Column="1"
+                                Spacing="1"
+                                VerticalOptions="Center">
+
                                 <Label
                                     Text="Mario Cesar Alves Júnior"
                                     FontFamily="OpenSansSemibold"
                                     FontSize="18"
                                     TextColor="#FFFFFF" />
+
                                 <Label
                                     Text="Academia do Zé • Desenvolvimento de Sistemas"
                                     FontFamily="OpenSansRegular"
                                     FontSize="11"
                                     TextColor="#C9D6E0" />
+
                             </VerticalStackLayout>
                         </Grid>
                     </Grid>
                 </Border>
 
+                <!-- Total de Logradouros -->
                 <Border
                     x:Name="TotalCard"
                     Grid.Column="1"
-                    BackgroundColor="#FFFFFF"
-                    Stroke="#D7E1E9"
+                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#172533}"
+                    Stroke="{AppThemeBinding Light=#D7E1E9, Dark=#30475A}"
                     StrokeThickness="1"
                     StrokeShape="RoundRectangle 18"
                     Padding="22">
+
                     <Border.Shadow>
-                        <Shadow Brush="#16051A2A" Offset="0,4" Radius="12" Opacity="0.7" />
+                        <Shadow
+                            Brush="#16051A2A"
+                            Offset="0,4"
+                            Radius="12"
+                            Opacity="0.7" />
                     </Border.Shadow>
-                    <Grid RowDefinitions="Auto,*,Auto" RowSpacing="14">
+
+                    <Grid
+                        RowDefinitions="Auto,*,Auto"
+                        RowSpacing="14">
+
                         <Grid ColumnDefinitions="*,Auto">
+
                             <VerticalStackLayout Spacing="2">
+
                                 <Label
                                     Text="LOGRADOUROS"
                                     FontFamily="OpenSansSemibold"
                                     FontSize="10"
                                     CharacterSpacing="1.5"
-                                    TextColor="#A36E12" />
+                                    TextColor="#D99516" />
+
                                 <Label
                                     Text="Total cadastrado"
                                     FontFamily="OpenSansRegular"
                                     FontSize="13"
-                                    TextColor="#60758A" />
+                                    TextColor="{AppThemeBinding Light=#60758A, Dark=#B8C7D4}" />
+
                             </VerticalStackLayout>
+
                             <Border
                                 Grid.Column="1"
                                 Padding="10,5"
-                                BackgroundColor="#FFF4DA"
+                                BackgroundColor="{AppThemeBinding Light=#FFF4DA, Dark=#3A321F}"
                                 StrokeThickness="0"
                                 StrokeShape="RoundRectangle 10">
+
                                 <Label
                                     Text="ATUALIZADO"
                                     FontFamily="OpenSansSemibold"
                                     FontSize="9"
                                     CharacterSpacing="0.8"
-                                    TextColor="#9A6710" />
+                                    TextColor="{AppThemeBinding Light=#9A6710, Dark=#F1B84B}" />
+
                             </Border>
                         </Grid>
 
-                        <VerticalStackLayout Grid.Row="1" Spacing="0" VerticalOptions="Center">
+                        <VerticalStackLayout
+                            Grid.Row="1"
+                            Spacing="0"
+                            VerticalOptions="Center">
+
                             <ActivityIndicator
                                 x:Name="LoadingIndicator"
                                 IsRunning="False"
                                 IsVisible="False"
                                 HorizontalOptions="Start"
                                 Color="#D69520" />
+
                             <Label
                                 x:Name="TotalLogradourosLabel"
                                 Text="--"
                                 FontFamily="OpenSansSemibold"
                                 FontSize="58"
                                 LineHeight="0.95"
-                                TextColor="#081D30"
+                                TextColor="{AppThemeBinding Light=#081D30, Dark=White}"
                                 SemanticProperties.Description="Total de logradouros cadastrados" />
+
                             <Label
                                 Text="Total de Logradouros"
                                 FontFamily="OpenSansSemibold"
                                 FontSize="14"
-                                TextColor="#334E63" />
+                                TextColor="{AppThemeBinding Light=#334E63, Dark=#D9E2EC}" />
+
                             <Label
                                 x:Name="StatusLabel"
                                 Margin="0,6,0,0"
                                 FontFamily="OpenSansRegular"
                                 FontSize="11"
-                                TextColor="#B42318"
+                                TextColor="{AppThemeBinding Light=#B42318, Dark=#FFAAA3}"
                                 IsVisible="False" />
+
                         </VerticalStackLayout>
 
                         <Button
@@ -219,49 +274,65 @@
                             HorizontalOptions="Fill"
                             Clicked="OnAcessarLogradourosClicked"
                             SemanticProperties.Hint="Abre a página de Logradouros" />
+
                     </Grid>
                 </Border>
             </Grid>
 
+            <!-- Acesso rápido -->
             <Border
                 Grid.Row="2"
-                BackgroundColor="#FFFFFF"
-                Stroke="#D7E1E9"
+                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#172533}"
+                Stroke="{AppThemeBinding Light=#D7E1E9, Dark=#30475A}"
                 StrokeThickness="1"
                 StrokeShape="RoundRectangle 16"
                 Padding="18,14">
-                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+
+                <Grid
+                    ColumnDefinitions="Auto,*,Auto"
+                    ColumnSpacing="14">
+
                     <Border
                         WidthRequest="42"
                         HeightRequest="42"
-                        BackgroundColor="#FFF4DA"
+                        BackgroundColor="{AppThemeBinding Light=#FFF4DA, Dark=#3A321F}"
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 12">
+
                         <Label
                             Text="AZ"
                             HorizontalOptions="Center"
                             VerticalOptions="Center"
                             FontFamily="OpenSansSemibold"
                             FontSize="13"
-                            TextColor="#9A6710" />
+                            TextColor="{AppThemeBinding Light=#9A6710, Dark=#F1B84B}" />
+
                     </Border>
-                    <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+
+                    <VerticalStackLayout
+                        Grid.Column="1"
+                        Spacing="1"
+                        VerticalOptions="Center">
+
                         <Label
                             Text="Acesso rápido"
                             FontFamily="OpenSansSemibold"
                             FontSize="16"
-                            TextColor="#081D30" />
+                            TextColor="{AppThemeBinding Light=#081D30, Dark=White}" />
+
                         <Label
                             Text="Consulte os endereços cadastrados no sistema."
                             FontFamily="OpenSansRegular"
                             FontSize="12"
-                            TextColor="#60758A" />
+                            TextColor="{AppThemeBinding Light=#60758A, Dark=#B8C7D4}" />
+
                     </VerticalStackLayout>
+
                     <Button
                         Grid.Column="2"
                         Text="Ver Logradouros"
-                        BackgroundColor="#EAF0F5"
-                        TextColor="#0B263D"
+                        BackgroundColor="{AppThemeBinding Light=#EAF0F5, Dark=#294154}"
+                        TextColor="{AppThemeBinding Light=#0B263D, Dark=White}"
                         FontFamily="OpenSansSemibold"
                         FontSize="13"
                         CornerRadius="10"
@@ -269,8 +340,10 @@
                         MinimumHeightRequest="42"
                         VerticalOptions="Center"
                         Clicked="OnAcessarLogradourosClicked" />
+
                 </Grid>
             </Border>
+
         </Grid>
     </ScrollView>
 </ContentPage>

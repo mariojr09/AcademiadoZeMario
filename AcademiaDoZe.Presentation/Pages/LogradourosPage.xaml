@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
+
 <ContentPage
     x:Class="AcademiaDoZe.Presentation.Pages.LogradourosPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:dto="clr-namespace:AcademiaDoZe.Application.DTOs;assembly=AcademiaDoZe.Application"
     Title="Logradouros"
-    BackgroundColor="#F4F7FA">
+    BackgroundColor="{AppThemeBinding Light=#F4F7FA, Dark=#101820}">
 
     <Grid
         Padding="26,20,26,24"
@@ -14,26 +15,35 @@
         MaximumWidthRequest="1180"
         HorizontalOptions="Fill">
 
-        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+        <!-- CABEÇALHO -->
+        <Grid
+            ColumnDefinitions="*,Auto"
+            ColumnSpacing="16">
+
             <VerticalStackLayout Spacing="2">
+
                 <Label
                     Text="GESTÃO DE ENDEREÇOS"
                     FontFamily="OpenSansSemibold"
                     FontSize="10"
                     CharacterSpacing="1.7"
-                    TextColor="#A36E12" />
+                    TextColor="#D99516" />
+
                 <Label
                     Text="Logradouros"
                     FontFamily="OpenSansSemibold"
                     FontSize="28"
-                    TextColor="#081D30" />
+                    TextColor="{AppThemeBinding Light=#081D30, Dark=White}" />
+
                 <Label
                     Text="Consulte, cadastre e mantenha os endereços da academia."
                     FontFamily="OpenSansRegular"
                     FontSize="12"
-                    TextColor="#60758A" />
+                    TextColor="{AppThemeBinding Light=#60758A, Dark=#B8C7D4}" />
+
             </VerticalStackLayout>
 
+            <!-- NOVO LOGRADOURO -->
             <Button
                 Grid.Column="1"
                 Text="Novo Logradouro"
@@ -45,27 +55,42 @@
                 Padding="18,11"
                 MinimumHeightRequest="44"
                 VerticalOptions="Center"
-                Clicked="OnNovoLogradouroClicked" />
+                ContentLayout="Left,8"
+                Clicked="OnNovoLogradouroClicked">
+
+                <Button.ImageSource>
+                    <FontImageSource
+                        FontFamily="MaterialIcons"
+                        Glyph="&#xE145;"
+                        Color="#081D30"
+                        Size="20" />
+                </Button.ImageSource>
+
+            </Button>
+
         </Grid>
 
+        <!-- PESQUISA -->
         <Border
             Grid.Row="1"
             Padding="14"
-            BackgroundColor="#FFFFFF"
-            Stroke="#D7E1E9"
+            BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#172533}"
+            Stroke="{AppThemeBinding Light=#D7E1E9, Dark=#30475A}"
             StrokeThickness="1"
             StrokeShape="RoundRectangle 15">
+
             <FlexLayout
                 Direction="Row"
                 Wrap="Wrap"
                 AlignItems="Center"
                 JustifyContent="SpaceBetween">
+
                 <SearchBar
                     x:Name="PesquisaSearchBar"
                     Placeholder="Pesquisar por CEP, nome, bairro ou cidade"
-                    PlaceholderColor="#7A8FA1"
-                    TextColor="#081D30"
-                    BackgroundColor="#F1F5F8"
+                    PlaceholderColor="{AppThemeBinding Light=#7A8FA1, Dark=#9FB3C8}"
+                    TextColor="{AppThemeBinding Light=#081D30, Dark=White}"
+                    BackgroundColor="{AppThemeBinding Light=#F1F5F8, Dark=#223545}"
                     FontFamily="OpenSansRegular"
                     FontSize="13"
                     HeightRequest="46"
@@ -73,28 +98,48 @@
                     FlexLayout.Basis="65%"
                     FlexLayout.Grow="1"
                     TextChanged="OnPesquisaTextChanged" />
+
+                <!-- ATUALIZAR -->
                 <Button
                     Text="Atualizar lista"
                     Margin="10,0,0,0"
-                    BackgroundColor="#EAF0F5"
-                    TextColor="#0B263D"
+                    BackgroundColor="{AppThemeBinding Light=#EAF0F5, Dark=#294154}"
+                    TextColor="{AppThemeBinding Light=#0B263D, Dark=White}"
                     FontFamily="OpenSansSemibold"
                     FontSize="12"
                     CornerRadius="10"
                     Padding="16,10"
                     MinimumHeightRequest="42"
-                    Clicked="OnAtualizarClicked" />
+                    ContentLayout="Left,7"
+                    Clicked="OnAtualizarClicked">
+
+                    <Button.ImageSource>
+                        <FontImageSource
+                            FontFamily="MaterialIcons"
+                            Glyph="&#xE5D5;"
+                            Color="{AppThemeBinding Light=#0B263D, Dark=White}"
+                            Size="18" />
+                    </Button.ImageSource>
+
+                </Button>
+
             </FlexLayout>
+
         </Border>
 
-        <Grid Grid.Row="2" ColumnDefinitions="*,Auto">
+        <!-- QUANTIDADE / CARREGAMENTO -->
+        <Grid
+            Grid.Row="2"
+            ColumnDefinitions="*,Auto">
+
             <Label
                 x:Name="QuantidadeLabel"
                 Text="0 registros encontrados"
                 FontFamily="OpenSansSemibold"
                 FontSize="12"
-                TextColor="#334E63"
+                TextColor="{AppThemeBinding Light=#334E63, Dark=#D9E2EC}"
                 VerticalOptions="Center" />
+
             <ActivityIndicator
                 x:Name="LoadingIndicator"
                 Grid.Column="1"
@@ -103,75 +148,111 @@
                 Color="#D69520"
                 WidthRequest="24"
                 HeightRequest="24" />
+
         </Grid>
 
+        <!-- LISTA -->
         <CollectionView
             x:Name="LogradourosCollection"
             Grid.Row="3"
             SelectionMode="None"
             VerticalScrollBarVisibility="Always">
+
+            <!-- LISTA VAZIA -->
             <CollectionView.EmptyView>
+
                 <Border
                     Margin="0,12"
                     Padding="30"
-                    BackgroundColor="#FFFFFF"
-                    Stroke="#D7E1E9"
+                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#172533}"
+                    Stroke="{AppThemeBinding Light=#D7E1E9, Dark=#30475A}"
                     StrokeThickness="1"
                     StrokeShape="RoundRectangle 16">
-                    <VerticalStackLayout Spacing="7" HorizontalOptions="Center">
+
+                    <VerticalStackLayout
+                        Spacing="7"
+                        HorizontalOptions="Center">
+
                         <Label
                             Text="Nenhum logradouro encontrado"
                             FontFamily="OpenSansSemibold"
                             FontSize="17"
-                            TextColor="#081D30"
+                            TextColor="{AppThemeBinding Light=#081D30, Dark=White}"
                             HorizontalTextAlignment="Center" />
+
                         <Label
                             Text="Cadastre um novo endereço ou ajuste os termos da pesquisa."
                             FontFamily="OpenSansRegular"
                             FontSize="12"
-                            TextColor="#60758A"
+                            TextColor="{AppThemeBinding Light=#60758A, Dark=#B8C7D4}"
                             HorizontalTextAlignment="Center" />
+
                     </VerticalStackLayout>
+
                 </Border>
+
             </CollectionView.EmptyView>
+
+            <!-- ITENS -->
             <CollectionView.ItemTemplate>
+
                 <DataTemplate x:DataType="dto:LogradouroDto">
+
                     <Border
                         Margin="0,0,0,10"
                         Padding="17,14"
-                        BackgroundColor="#FFFFFF"
-                        Stroke="#D7E1E9"
+                        BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#172533}"
+                        Stroke="{AppThemeBinding Light=#D7E1E9, Dark=#30475A}"
                         StrokeThickness="1"
                         StrokeShape="RoundRectangle 14">
-                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="18">
+
+                        <Grid
+                            ColumnDefinitions="*,Auto"
+                            ColumnSpacing="18">
+
+                            <!-- DADOS -->
                             <VerticalStackLayout Spacing="5">
-                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+
+                                <Grid
+                                    ColumnDefinitions="Auto,*"
+                                    ColumnSpacing="10">
+
+                                    <!-- CEP -->
                                     <Border
                                         Padding="9,4"
-                                        BackgroundColor="#FFF4DA"
+                                        BackgroundColor="{AppThemeBinding Light=#FFF4DA, Dark=#3A321F}"
                                         StrokeThickness="0"
                                         StrokeShape="RoundRectangle 8">
+
                                         <Label
                                             Text="{Binding Cep}"
                                             FontFamily="OpenSansSemibold"
                                             FontSize="11"
-                                            TextColor="#9A6710" />
+                                            TextColor="{AppThemeBinding Light=#9A6710, Dark=#F1B84B}" />
+
                                     </Border>
+
+                                    <!-- NOME -->
                                     <Label
                                         Grid.Column="1"
                                         Text="{Binding Nome}"
                                         FontFamily="OpenSansSemibold"
                                         FontSize="16"
-                                        TextColor="#081D30"
+                                        TextColor="{AppThemeBinding Light=#081D30, Dark=White}"
                                         LineBreakMode="TailTruncation"
                                         VerticalOptions="Center" />
+
                                 </Grid>
+
+                                <!-- ENDEREÇO -->
                                 <Label
                                     FontFamily="OpenSansRegular"
                                     FontSize="12"
-                                    TextColor="#526B7E">
+                                    TextColor="{AppThemeBinding Light=#526B7E, Dark=#B8C7D4}">
+
                                     <Label.FormattedText>
                                         <FormattedString>
+
                                             <Span Text="{Binding Bairro}" />
                                             <Span Text="  •  " />
                                             <Span Text="{Binding Cidade}" />
@@ -179,39 +260,80 @@
                                             <Span Text="{Binding Estado}" />
                                             <Span Text="  •  " />
                                             <Span Text="{Binding Pais}" />
+
                                         </FormattedString>
                                     </Label.FormattedText>
+
                                 </Label>
+
                             </VerticalStackLayout>
 
-                            <HorizontalStackLayout Grid.Column="1" Spacing="8" VerticalOptions="Center">
+                            <!-- AÇÕES -->
+                            <HorizontalStackLayout
+                                Grid.Column="1"
+                                Spacing="8"
+                                VerticalOptions="Center">
+
+                                <!-- EDITAR -->
                                 <Button
                                     Text="Editar"
-                                    CommandParameter="{Binding .}"
-                                    BackgroundColor="#EAF0F5"
-                                    TextColor="#0B263D"
+                                    CommandParameter="{Binding}"
+                                    BackgroundColor="{AppThemeBinding Light=#EAF0F5, Dark=#294154}"
+                                    TextColor="{AppThemeBinding Light=#0B263D, Dark=White}"
                                     FontFamily="OpenSansSemibold"
                                     FontSize="11"
                                     CornerRadius="9"
                                     Padding="14,8"
                                     MinimumHeightRequest="38"
-                                    Clicked="OnEditarClicked" />
+                                    ContentLayout="Left,6"
+                                    Clicked="OnEditarClicked">
+
+                                    <Button.ImageSource>
+                                        <FontImageSource
+                                            FontFamily="MaterialIcons"
+                                            Glyph="&#xE3C9;"
+                                            Color="{AppThemeBinding Light=#0B263D, Dark=White}"
+                                            Size="16" />
+                                    </Button.ImageSource>
+
+                                </Button>
+
+                                <!-- EXCLUIR -->
                                 <Button
                                     Text="Excluir"
-                                    CommandParameter="{Binding .}"
-                                    BackgroundColor="#FFF0EE"
-                                    TextColor="#B42318"
+                                    CommandParameter="{Binding}"
+                                    BackgroundColor="{AppThemeBinding Light=#FFF0EE, Dark=#432726}"
+                                    TextColor="{AppThemeBinding Light=#B42318, Dark=#FFAAA3}"
                                     FontFamily="OpenSansSemibold"
                                     FontSize="11"
                                     CornerRadius="9"
                                     Padding="14,8"
                                     MinimumHeightRequest="38"
-                                    Clicked="OnExcluirClicked" />
+                                    ContentLayout="Left,6"
+                                    Clicked="OnExcluirClicked">
+
+                                    <Button.ImageSource>
+                                        <FontImageSource
+                                            FontFamily="MaterialIcons"
+                                            Glyph="&#xE872;"
+                                            Color="{AppThemeBinding Light=#B42318, Dark=#FFAAA3}"
+                                            Size="16" />
+                                    </Button.ImageSource>
+
+                                </Button>
+
                             </HorizontalStackLayout>
+
                         </Grid>
+
                     </Border>
+
                 </DataTemplate>
+
             </CollectionView.ItemTemplate>
+
         </CollectionView>
+
     </Grid>
+
 </ContentPage>

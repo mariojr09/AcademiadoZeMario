@@ -8,9 +8,34 @@
     FlyoutBackgroundColor="{StaticResource Navy900}"
     FlyoutWidth="290"
     Shell.BackgroundColor="{StaticResource Navy900}"
-    Shell.ForegroundColor="{StaticResource White}"
-    Shell.UnselectedColor="{StaticResource Slate300}"
-    Shell.TitleColor="{StaticResource White}">
+    Shell.ForegroundColor="White"
+    Shell.UnselectedColor="White"
+    Shell.TitleColor="White">
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid
+            Padding="16,12"
+            ColumnDefinitions="30,*"
+            ColumnSpacing="10">
+
+                <Image
+                Source="{Binding FlyoutIcon}"
+                WidthRequest="20"
+                HeightRequest="20"
+                VerticalOptions="Center" />
+
+                <Label
+                Grid.Column="1"
+                Text="{Binding Title}"
+                TextColor="White"
+                FontFamily="OpenSansSemibold"
+                FontSize="14"
+                VerticalOptions="Center" />
+
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
 
     <Shell.FlyoutHeader>
         <Grid Padding="24,34,24,24" RowDefinitions="Auto,Auto,Auto">
@@ -37,10 +62,47 @@
     </Shell.FlyoutHeader>
 
     <FlyoutItem Title="Dashboard" Route="dashboard">
-        <ShellContent x:Name="DashboardShellContent" Title="Dashboard" Route="dashboard-page" />
+        <FlyoutItem.Icon>
+            <FontImageSource
+            FontFamily="MaterialIcons"
+            Glyph="&#xE88A;"
+            Color="White"
+            Size="22" />
+        </FlyoutItem.Icon>
+
+        <ShellContent
+        x:Name="DashboardShellContent"
+        Title="Dashboard"
+        Route="dashboard-page" />
     </FlyoutItem>
 
     <FlyoutItem Title="Logradouros" Route="logradouros">
-        <ShellContent x:Name="LogradourosShellContent" Title="Logradouros" Route="logradouros-page" />
+        <FlyoutItem.Icon>
+            <FontImageSource
+            FontFamily="MaterialIcons"
+            Glyph="&#xE55F;"
+            Color="White"
+            Size="22" />
+        </FlyoutItem.Icon>
+
+        <ShellContent
+        x:Name="LogradourosShellContent"
+        Title="Logradouros"
+        Route="logradouros-page" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Configurações" Route="configuracoes">
+        <FlyoutItem.Icon>
+            <FontImageSource
+            FontFamily="MaterialIcons"
+            Glyph="&#xE8B8;"
+            Color="White"
+            Size="22" />
+        </FlyoutItem.Icon>
+
+        <ShellContent
+        x:Name="ConfigShellContent"
+        Title="Configurações"
+        Route="configuracoes-page" />
     </FlyoutItem>
 </Shell>

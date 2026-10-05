@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
+
 <ContentPage
     x:Class="AcademiaDoZe.Presentation.Pages.LogradouroFormPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Logradouro"
-    BackgroundColor="#F4F7FA">
+    BackgroundColor="{AppThemeBinding Light=#F4F7FA, Dark=#101820}">
 
     <ScrollView>
+
         <Grid
             Padding="26,20,26,32"
             RowDefinitions="Auto,Auto"
@@ -14,47 +16,72 @@
             MaximumWidthRequest="760"
             HorizontalOptions="Center">
 
+            <!-- CABEÇALHO -->
             <VerticalStackLayout Spacing="3">
+
                 <Label
                     Text="GESTÃO DE ENDEREÇOS"
                     FontFamily="OpenSansSemibold"
                     FontSize="10"
                     CharacterSpacing="1.7"
-                    TextColor="#A36E12" />
+                    TextColor="#D99516" />
+
                 <Label
                     x:Name="TituloLabel"
                     Text="Novo Logradouro"
                     FontFamily="OpenSansSemibold"
                     FontSize="27"
-                    TextColor="#081D30" />
+                    TextColor="{AppThemeBinding Light=#081D30, Dark=White}" />
+
                 <Label
                     x:Name="DescricaoLabel"
                     Text="Preencha os dados para cadastrar um endereço."
                     FontFamily="OpenSansRegular"
                     FontSize="12"
-                    TextColor="#60758A" />
+                    TextColor="{AppThemeBinding Light=#60758A, Dark=#B8C7D4}" />
+
             </VerticalStackLayout>
 
+            <!-- FORMULÁRIO -->
             <Border
                 Grid.Row="1"
                 Padding="24,20"
-                BackgroundColor="#FFFFFF"
-                Stroke="#D7E1E9"
+                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#172533}"
+                Stroke="{AppThemeBinding Light=#D7E1E9, Dark=#30475A}"
                 StrokeThickness="1"
                 StrokeShape="RoundRectangle 18">
+
                 <Border.Shadow>
-                    <Shadow Brush="#16051A2A" Offset="0,4" Radius="12" Opacity="0.7" />
+                    <Shadow
+                        Brush="#16051A2A"
+                        Offset="0,4"
+                        Radius="12"
+                        Opacity="0.7" />
                 </Border.Shadow>
+
                 <VerticalStackLayout Spacing="14">
+
+                    <!-- CEP -->
                     <VerticalStackLayout Spacing="5">
-                        <Label Text="CEP *" FontFamily="OpenSansSemibold" FontSize="12" TextColor="#334E63" />
-                        <Border BackgroundColor="#F6F8FA" Stroke="#CCD8E1" StrokeThickness="1"
-                                StrokeShape="RoundRectangle 10" Padding="12,2">
+
+                        <Label
+                            Text="CEP *"
+                            FontFamily="OpenSansSemibold"
+                            FontSize="12"
+                            TextColor="{AppThemeBinding Light=#334E63, Dark=#D9E2EC}" />
+
+                        <Border
+                            BackgroundColor="{AppThemeBinding Light=#F6F8FA, Dark=#223545}"
+                            Stroke="{AppThemeBinding Light=#CCD8E1, Dark=#40576A}"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 10"
+                            Padding="12,2">
+
                             <Entry
                                 x:Name="CepEntry"
                                 Placeholder="00000-000"
-                                PlaceholderColor="#8A9CAA"
-                                TextColor="#081D30"
+                                PlaceholderColor="{AppThemeBinding Light=#8A9CAA, Dark=#9FB3C8}"
+                                TextColor="{AppThemeBinding Light=#081D30, Dark=White}"
                                 BackgroundColor="Transparent"
                                 FontFamily="OpenSansRegular"
                                 FontSize="14"
@@ -63,113 +90,213 @@
                                 ReturnType="Next"
                                 ClearButtonVisibility="WhileEditing"
                                 TextChanged="OnCepTextChanged" />
+
                         </Border>
+
                     </VerticalStackLayout>
 
+                    <!-- NOME -->
                     <VerticalStackLayout Spacing="5">
-                        <Label Text="Nome do Logradouro *" FontFamily="OpenSansSemibold" FontSize="12" TextColor="#334E63" />
-                        <Border BackgroundColor="#F6F8FA" Stroke="#CCD8E1" StrokeThickness="1"
-                                StrokeShape="RoundRectangle 10" Padding="12,2">
+
+                        <Label
+                            Text="Nome do Logradouro *"
+                            FontFamily="OpenSansSemibold"
+                            FontSize="12"
+                            TextColor="{AppThemeBinding Light=#334E63, Dark=#D9E2EC}" />
+
+                        <Border
+                            BackgroundColor="{AppThemeBinding Light=#F6F8FA, Dark=#223545}"
+                            Stroke="{AppThemeBinding Light=#CCD8E1, Dark=#40576A}"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 10"
+                            Padding="12,2">
+
                             <Entry
                                 x:Name="NomeEntry"
                                 Placeholder="Ex.: Mario Cesar Alves Júnior"
-                                PlaceholderColor="#8A9CAA"
-                                TextColor="#081D30"
+                                PlaceholderColor="{AppThemeBinding Light=#8A9CAA, Dark=#9FB3C8}"
+                                TextColor="{AppThemeBinding Light=#081D30, Dark=White}"
                                 BackgroundColor="Transparent"
                                 FontFamily="OpenSansRegular"
                                 FontSize="14"
                                 ReturnType="Next"
                                 ClearButtonVisibility="WhileEditing" />
+
                         </Border>
+
                     </VerticalStackLayout>
 
+                    <!-- BAIRRO -->
                     <VerticalStackLayout Spacing="5">
-                        <Label Text="Bairro *" FontFamily="OpenSansSemibold" FontSize="12" TextColor="#334E63" />
-                        <Border BackgroundColor="#F6F8FA" Stroke="#CCD8E1" StrokeThickness="1"
-                                StrokeShape="RoundRectangle 10" Padding="12,2">
+
+                        <Label
+                            Text="Bairro *"
+                            FontFamily="OpenSansSemibold"
+                            FontSize="12"
+                            TextColor="{AppThemeBinding Light=#334E63, Dark=#D9E2EC}" />
+
+                        <Border
+                            BackgroundColor="{AppThemeBinding Light=#F6F8FA, Dark=#223545}"
+                            Stroke="{AppThemeBinding Light=#CCD8E1, Dark=#40576A}"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 10"
+                            Padding="12,2">
+
                             <Entry
                                 x:Name="BairroEntry"
                                 Placeholder="Ex.: Centro"
-                                PlaceholderColor="#8A9CAA"
-                                TextColor="#081D30"
+                                PlaceholderColor="{AppThemeBinding Light=#8A9CAA, Dark=#9FB3C8}"
+                                TextColor="{AppThemeBinding Light=#081D30, Dark=White}"
                                 BackgroundColor="Transparent"
                                 FontFamily="OpenSansRegular"
                                 FontSize="14"
                                 ReturnType="Next"
                                 ClearButtonVisibility="WhileEditing" />
+
                         </Border>
+
                     </VerticalStackLayout>
 
+                    <!-- CIDADE -->
                     <VerticalStackLayout Spacing="5">
-                        <Label Text="Cidade *" FontFamily="OpenSansSemibold" FontSize="12" TextColor="#334E63" />
-                        <Border BackgroundColor="#F6F8FA" Stroke="#CCD8E1" StrokeThickness="1"
-                                StrokeShape="RoundRectangle 10" Padding="12,2">
+
+                        <Label
+                            Text="Cidade *"
+                            FontFamily="OpenSansSemibold"
+                            FontSize="12"
+                            TextColor="{AppThemeBinding Light=#334E63, Dark=#D9E2EC}" />
+
+                        <Border
+                            BackgroundColor="{AppThemeBinding Light=#F6F8FA, Dark=#223545}"
+                            Stroke="{AppThemeBinding Light=#CCD8E1, Dark=#40576A}"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 10"
+                            Padding="12,2">
+
                             <Entry
                                 x:Name="CidadeEntry"
                                 Placeholder="Ex.: Florianópolis"
-                                PlaceholderColor="#8A9CAA"
-                                TextColor="#081D30"
+                                PlaceholderColor="{AppThemeBinding Light=#8A9CAA, Dark=#9FB3C8}"
+                                TextColor="{AppThemeBinding Light=#081D30, Dark=White}"
                                 BackgroundColor="Transparent"
                                 FontFamily="OpenSansRegular"
                                 FontSize="14"
                                 ReturnType="Next"
                                 ClearButtonVisibility="WhileEditing" />
+
                         </Border>
+
                     </VerticalStackLayout>
 
-                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                    <!-- ESTADO / PAÍS -->
+                    <Grid
+                        ColumnDefinitions="*,*"
+                        ColumnSpacing="12">
+
+                        <!-- ESTADO -->
                         <VerticalStackLayout Spacing="5">
-                            <Label Text="Estado *" FontFamily="OpenSansSemibold" FontSize="12" TextColor="#334E63" />
-                            <Border BackgroundColor="#F6F8FA" Stroke="#CCD8E1" StrokeThickness="1"
-                                    StrokeShape="RoundRectangle 10" Padding="12,2">
+
+                            <Label
+                                Text="Estado *"
+                                FontFamily="OpenSansSemibold"
+                                FontSize="12"
+                                TextColor="{AppThemeBinding Light=#334E63, Dark=#D9E2EC}" />
+
+                            <Border
+                                BackgroundColor="{AppThemeBinding Light=#F6F8FA, Dark=#223545}"
+                                Stroke="{AppThemeBinding Light=#CCD8E1, Dark=#40576A}"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="12,2">
+
                                 <Entry
                                     x:Name="EstadoEntry"
                                     Placeholder="Ex.: SC"
-                                    PlaceholderColor="#8A9CAA"
-                                    TextColor="#081D30"
+                                    PlaceholderColor="{AppThemeBinding Light=#8A9CAA, Dark=#9FB3C8}"
+                                    TextColor="{AppThemeBinding Light=#081D30, Dark=White}"
                                     BackgroundColor="Transparent"
                                     FontFamily="OpenSansRegular"
                                     FontSize="14"
                                     ReturnType="Next"
                                     ClearButtonVisibility="WhileEditing" />
+
                             </Border>
+
                         </VerticalStackLayout>
-                        <VerticalStackLayout Grid.Column="1" Spacing="5">
-                            <Label Text="País *" FontFamily="OpenSansSemibold" FontSize="12" TextColor="#334E63" />
-                            <Border BackgroundColor="#F6F8FA" Stroke="#CCD8E1" StrokeThickness="1"
-                                    StrokeShape="RoundRectangle 10" Padding="12,2">
+
+                        <!-- PAÍS -->
+                        <VerticalStackLayout
+                            Grid.Column="1"
+                            Spacing="5">
+
+                            <Label
+                                Text="País *"
+                                FontFamily="OpenSansSemibold"
+                                FontSize="12"
+                                TextColor="{AppThemeBinding Light=#334E63, Dark=#D9E2EC}" />
+
+                            <Border
+                                BackgroundColor="{AppThemeBinding Light=#F6F8FA, Dark=#223545}"
+                                Stroke="{AppThemeBinding Light=#CCD8E1, Dark=#40576A}"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="12,2">
+
                                 <Entry
                                     x:Name="PaisEntry"
                                     Placeholder="Ex.: Brasil"
-                                    PlaceholderColor="#8A9CAA"
-                                    TextColor="#081D30"
+                                    PlaceholderColor="{AppThemeBinding Light=#8A9CAA, Dark=#9FB3C8}"
+                                    TextColor="{AppThemeBinding Light=#081D30, Dark=White}"
                                     BackgroundColor="Transparent"
                                     FontFamily="OpenSansRegular"
                                     FontSize="14"
                                     ReturnType="Done"
                                     ClearButtonVisibility="WhileEditing" />
+
                             </Border>
+
                         </VerticalStackLayout>
+
                     </Grid>
 
+                    <!-- VALIDAÇÃO -->
                     <Label
                         x:Name="ValidationLabel"
                         FontFamily="OpenSansSemibold"
                         FontSize="11"
-                        TextColor="#B42318"
+                        TextColor="{AppThemeBinding Light=#B42318, Dark=#FFAAA3}"
                         IsVisible="False" />
 
-                    <Grid ColumnDefinitions="0.7*,1.3*" ColumnSpacing="12" Margin="0,4,0,0">
+                    <!-- BOTÕES -->
+                    <Grid
+                        ColumnDefinitions="0.7*,1.3*"
+                        ColumnSpacing="12"
+                        Margin="0,4,0,0">
+
+                        <!-- CANCELAR -->
                         <Button
                             Text="Cancelar"
-                            BackgroundColor="#EAF0F5"
-                            TextColor="#0B263D"
+                            BackgroundColor="{AppThemeBinding Light=#EAF0F5, Dark=#294154}"
+                            TextColor="{AppThemeBinding Light=#0B263D, Dark=White}"
                             FontFamily="OpenSansSemibold"
                             FontSize="13"
                             CornerRadius="10"
                             Padding="16,11"
                             MinimumHeightRequest="44"
-                            Clicked="OnCancelarClicked" />
+                            ContentLayout="Left,7"
+                            Clicked="OnCancelarClicked">
+
+                            <Button.ImageSource>
+                                <FontImageSource
+                                    FontFamily="MaterialIcons"
+                                    Glyph="&#xE5C9;"
+                                    Color="{AppThemeBinding Light=#0B263D, Dark=White}"
+                                    Size="18" />
+                            </Button.ImageSource>
+
+                        </Button>
+
+                        <!-- SALVAR -->
                         <Button
                             x:Name="SalvarButton"
                             Grid.Column="1"
@@ -181,17 +308,35 @@
                             CornerRadius="10"
                             Padding="16,11"
                             MinimumHeightRequest="44"
-                            Clicked="OnSalvarClicked" />
+                            ContentLayout="Left,7"
+                            Clicked="OnSalvarClicked">
+
+                            <Button.ImageSource>
+                                <FontImageSource
+                                    FontFamily="MaterialIcons"
+                                    Glyph="&#xE161;"
+                                    Color="#081D30"
+                                    Size="18" />
+                            </Button.ImageSource>
+
+                        </Button>
+
                     </Grid>
 
+                    <!-- CARREGAMENTO -->
                     <ActivityIndicator
                         x:Name="LoadingIndicator"
                         IsRunning="False"
                         IsVisible="False"
                         Color="#D69520"
                         HorizontalOptions="Center" />
+
                 </VerticalStackLayout>
+
             </Border>
+
         </Grid>
+
     </ScrollView>
+
 </ContentPage>

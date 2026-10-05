@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AcademiaDoZe.Presentation.Pages.ConfigPage"
+             Title="Configurações"
+             BackgroundColor="{AppThemeBinding Light=#F4F7FA, Dark=#101820}">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="26,22"
+            Spacing="18"
+            MaximumWidthRequest="760"
+            HorizontalOptions="Center">
+
+            <!-- Cabeçalho -->
+            <VerticalStackLayout Spacing="4">
+
+                <Label
+                    Text="CONFIGURAÇÕES"
+                    FontSize="11"
+                    FontAttributes="Bold"
+                    TextColor="#D99516"
+                    CharacterSpacing="1.5" />
+
+                <Label
+                    Text="Preferências do Sistema"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+
+                <Label
+                    Text="Configure a conexão com o banco de dados e a aparência da aplicação."
+                    FontSize="14"
+                    TextColor="{AppThemeBinding Light=#627D98, Dark=#B8C7D4}" />
+
+            </VerticalStackLayout>
+
+            <!-- Banco de Dados -->
+            <Border
+                BackgroundColor="{AppThemeBinding Light=White, Dark=#172533}"
+                Stroke="{AppThemeBinding Light=#DCE5ED, Dark=#30475A}"
+                StrokeThickness="1"
+                Padding="22">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="16" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label
+                        Text="Banco de Dados"
+                        FontSize="19"
+                        FontAttributes="Bold"
+                        TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+
+                    <Label
+                        Text="MySQL"
+                        FontSize="13"
+                        TextColor="{AppThemeBinding Light=#627D98, Dark=#B8C7D4}" />
+
+                    <Label
+                        Text="Servidor"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="{AppThemeBinding Light=#334E68, Dark=#D9E2EC}" />
+
+                    <Entry
+                        x:Name="ServidorEntry"
+                        Placeholder="Ex.: localhost"
+                        BackgroundColor="{AppThemeBinding Light=#F4F7FA, Dark=#223545}"
+                        TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+
+                    <Label
+                        Text="Banco de Dados"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="{AppThemeBinding Light=#334E68, Dark=#D9E2EC}" />
+
+                    <Entry
+                        x:Name="BancoEntry"
+                        Placeholder="Nome do banco"
+                        BackgroundColor="{AppThemeBinding Light=#F4F7FA, Dark=#223545}"
+                        TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+
+                    <Label
+                        Text="Usuário"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="{AppThemeBinding Light=#334E68, Dark=#D9E2EC}" />
+
+                    <Entry
+                        x:Name="UsuarioEntry"
+                        Placeholder="Usuário do MySQL"
+                        BackgroundColor="{AppThemeBinding Light=#F4F7FA, Dark=#223545}"
+                        TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+
+                    <Label
+                        Text="Senha"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="{AppThemeBinding Light=#334E68, Dark=#D9E2EC}" />
+
+                    <Entry
+                        x:Name="SenhaEntry"
+                        Placeholder="Senha"
+                        IsPassword="True"
+                        BackgroundColor="{AppThemeBinding Light=#F4F7FA, Dark=#223545}"
+                        TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Aparência -->
+            <Border
+                BackgroundColor="{AppThemeBinding Light=White, Dark=#172533}"
+                Stroke="{AppThemeBinding Light=#DCE5ED, Dark=#30475A}"
+                StrokeThickness="1"
+                Padding="22">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="16" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Label
+                        Text="Aparência"
+                        FontSize="19"
+                        FontAttributes="Bold"
+                        TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+
+                    <Label
+                        Text="Tema da aplicação"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="{AppThemeBinding Light=#334E68, Dark=#D9E2EC}" />
+
+                    <Picker
+                        x:Name="TemaPicker"
+                        Title="Selecione o tema"
+                        BackgroundColor="{AppThemeBinding Light=#F4F7FA, Dark=#223545}"
+                        TextColor="{AppThemeBinding Light=#102A43, Dark=White}">
+
+                        <Picker.Items>
+                            <x:String>Claro</x:String>
+                            <x:String>Escuro</x:String>
+                            <x:String>Sistema</x:String>
+                        </Picker.Items>
+
+                    </Picker>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Salvar -->
+            <Button
+                x:Name="SalvarButton"
+                Text="Salvar Configurações"
+                BackgroundColor="#EFA625"
+                TextColor="#081D30"
+                FontAttributes="Bold"
+                FontSize="14"
+                CornerRadius="10"
+                HeightRequest="48"
+                Clicked="SalvarButton_Clicked" />
+
+            <Label
+                Text="Academia do Zé • Mario Cesar Alves Júnior"
+                FontSize="11"
+                TextColor="{AppThemeBinding Light=#829AB1, Dark=#9FB3C8}"
+                HorizontalTextAlignment="Center"
+                Margin="0,4,0,10" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
