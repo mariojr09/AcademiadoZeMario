@@ -2,9 +2,7 @@
 using AcademiadoZE.Domain.ValueObjects;
 
 using AcademiadoZE.Domain.Common;
-using AcademiadoZE.Domain.Enums;
 using AcademiadoZE.Domain.Services;
-using AcademiadoZE.Domain.ValueObjects;
 
 namespace AcademiadoZE.Domain.Entities;
 //Mario Cesar alves Júnior

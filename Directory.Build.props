@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!-- Saídas alternativas do MSBuild não podem ser tratadas como código-fonte. -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);**\.artifacts\**;**/.artifacts/**</DefaultItemExcludes>
+  </PropertyGroup>
+</Project>

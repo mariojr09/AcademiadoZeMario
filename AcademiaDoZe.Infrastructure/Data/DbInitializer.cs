@@ -36,6 +36,13 @@ public static class DbInitializer
 
             await command.ExecuteNonQueryAsync(cancellationToken);
 
+            if (databaseType == DatabaseType.MySql)
+            {
+                await ValidarEsquemaMySqlAsync(
+                    connection,
+                    cancellationToken);
+            }
+
             _bancosInicializados.TryAdd(key, true);
         }
         catch (DbException ex)
@@ -44,6 +51,54 @@ public static class DbInitializer
                 "ERRO_INICIALIZAR_BANCO",
                 $"Erro ao inicializar banco de dados: {ex.Message}",
                 ex);
+        }
+    }
+
+    private static async Task ValidarEsquemaMySqlAsync(
+        DbConnection connection,
+        CancellationToken cancellationToken)
+    {
+        var esperadas = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["tb_logradouro"] = ["id_logradouro", "cep", "nome", "bairro", "cidade", "estado", "pais"],
+            ["tb_aluno"] = ["id_aluno", "cpf", "nome", "nascimento", "telefone", "email", "logradouro_id", "numero", "complemento", "senha", "foto"],
+            ["tb_colaborador"] = ["id_colaborador", "cpf", "nome", "nascimento", "telefone", "email", "logradouro_id", "numero", "complemento", "senha", "foto", "admissao", "tipo", "vinculo"]
+        };
+
+        const string sql = """
+            SELECT TABLE_NAME, COLUMN_NAME
+            FROM INFORMATION_SCHEMA.COLUMNS
+            WHERE TABLE_SCHEMA = DATABASE()
+              AND TABLE_NAME IN ('tb_logradouro', 'tb_aluno', 'tb_colaborador')
+            """;
+
+        await using var command = DbProvider.CreateCommand(sql, connection);
+        await using var reader = await command.ExecuteReaderAsync(cancellationToken);
+        var encontradas = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
+
+        while (await reader.ReadAsync(cancellationToken))
+        {
+            var tabela = reader.GetString(0);
+            var coluna = reader.GetString(1);
+            if (!encontradas.TryGetValue(tabela, out var colunas))
+            {
+                colunas = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                encontradas[tabela] = colunas;
+            }
+            colunas.Add(coluna);
+        }
+
+        var ausentes = esperadas
+            .SelectMany(item => item.Value
+                .Where(coluna => !encontradas.TryGetValue(item.Key, out var colunas) || !colunas.Contains(coluna))
+                .Select(coluna => $"{item.Key}.{coluna}"))
+            .ToArray();
+
+        if (ausentes.Length > 0)
+        {
+            throw new InfrastructureException(
+                "SCHEMA_MYSQL_INCOMPATIVEL",
+                $"Estrutura MySQL incompatível. Tabelas/colunas ausentes: {string.Join(", ", ausentes)}.");
         }
     }
 

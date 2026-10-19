@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:AcademiaDoZe.Presentation.Converters"
+             x:Class="AcademiaDoZe.Presentation.Pages.AlunoListPage"
+             Title="Alunos"
+             BackgroundColor="{AppThemeBinding Light=#F4F7FB, Dark=#101820}">
+    <ContentPage.Resources>
+        <converters:FotoToImageSourceConverter x:Key="FotoConverter" />
+    </ContentPage.Resources>
+    <Grid RowDefinitions="Auto,Auto,*" Padding="20" RowSpacing="16" MaximumWidthRequest="1000" HorizontalOptions="Fill">
+        <VerticalStackLayout>
+            <Label Text="ALUNOS" FontSize="26" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+            <Label Text="Gestão de alunos • Academia do Zé" FontSize="13" TextColor="{AppThemeBinding Light=#52667A, Dark=#B8C4D0}" />
+        </VerticalStackLayout>
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+            <SearchBar x:Name="PesquisaEntry" Placeholder="Pesquisar por CPF" TextChanged="PesquisaEntry_TextChanged"
+                       BackgroundColor="{AppThemeBinding Light=White, Dark=#243746}"
+                       TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+            <Button Grid.Column="1" Text="+ Novo" Clicked="NovoButton_Clicked" BackgroundColor="#F26B4A"
+                    TextColor="White" FontAttributes="Bold" CornerRadius="12" Padding="15,10" />
+        </Grid>
+        <CollectionView x:Name="AlunosCollection" Grid.Row="2" SelectionMode="None">
+            <CollectionView.EmptyView>
+                <Label Text="Nenhum aluno encontrado." Padding="20,60" HorizontalTextAlignment="Center"
+                       TextColor="{AppThemeBinding Light=#52667A, Dark=#B8C4D0}" />
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border BackgroundColor="{AppThemeBinding Light=White, Dark=#243746}"
+                            Stroke="{AppThemeBinding Light=#DFE6ED, Dark=#34495E}" StrokeShape="RoundRectangle 14"
+                            Padding="12" Margin="0,0,0,10">
+                        <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="12">
+                            <Border WidthRequest="56" HeightRequest="56" StrokeThickness="0" StrokeShape="RoundRectangle 28" BackgroundColor="#DCE5EF">
+                                <Image Source="{Binding Foto, Converter={StaticResource FotoConverter}}" Aspect="AspectFill" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
+                                <Label Text="{Binding Nome}" FontSize="16" FontAttributes="Bold" LineBreakMode="TailTruncation"
+                                       TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+                                <Label Text="{Binding Cpf}" FontSize="13" TextColor="{AppThemeBinding Light=#52667A, Dark=#B8C4D0}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="2" Spacing="6" VerticalOptions="Center">
+                                <Button Text="Editar" FontSize="12" BackgroundColor="#102A43" TextColor="White" CornerRadius="8"
+                                        CommandParameter="{Binding Id}" Clicked="EditarButton_Clicked" />
+                                <Button Text="Excluir" FontSize="12" BackgroundColor="#F26B4A" TextColor="White" CornerRadius="8"
+                                        CommandParameter="{Binding .}" Clicked="ExcluirButton_Clicked" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

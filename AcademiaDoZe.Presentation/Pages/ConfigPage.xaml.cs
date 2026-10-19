@@ -21,15 +21,26 @@ public partial class ConfigPage : ContentPage
 
         UsuarioEntry.Text = Preferences.Default.Get(
             "DbUsuario",
-            "mario");
+            string.Empty);
 
         TemaPicker.SelectedItem = Preferences.Default.Get(
             "AppTema",
             "Sistema");
     }
 
-    private async void SalvarButton_Clicked(object sender, EventArgs e)
+    private async void SalvarButton_Clicked(object? sender, EventArgs e)
     {
+        if (string.IsNullOrWhiteSpace(ServidorEntry.Text) ||
+            string.IsNullOrWhiteSpace(BancoEntry.Text) ||
+            string.IsNullOrWhiteSpace(UsuarioEntry.Text))
+        {
+            await DisplayAlertAsync(
+                "Configurações",
+                "Informe servidor, banco de dados e usuário do MySQL.",
+                "OK");
+            return;
+        }
+
         Preferences.Default.Set(
             "DbServidor",
             ServidorEntry.Text?.Trim() ?? "");
@@ -44,9 +55,7 @@ public partial class ConfigPage : ContentPage
 
         if (!string.IsNullOrWhiteSpace(SenhaEntry.Text))
         {
-            Preferences.Default.Set(
-                "DbSenha",
-                SenhaEntry.Text);
+            await SecureStorage.Default.SetAsync("DbSenha", SenhaEntry.Text);
         }
 
         var tema = TemaPicker.SelectedItem?.ToString() ?? "Sistema";
@@ -64,7 +73,7 @@ public partial class ConfigPage : ContentPage
                 _ => AppTheme.Unspecified
             };
         }
-        await DisplayAlert(
+        await DisplayAlertAsync(
             "Configurações",
             "Configurações salvas com sucesso.",
             "OK");

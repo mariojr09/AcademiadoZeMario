@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="AcademiaDoZe.Presentation.Pages.ColaboradorPage"
+    Title="Cadastro de Colaborador"
+    BackgroundColor="{AppThemeBinding Light=#F4F7FB, Dark=#101820}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <!-- Cabeçalho -->
+            <Label
+                x:Name="TituloLabel"
+                Text="CADASTRO DE COLABORADOR"
+                FontSize="24"
+                FontAttributes="Bold"
+                TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+
+            <Label
+                Text="Equipe Academia do Zé"
+                FontSize="13"
+                TextColor="{AppThemeBinding Light=#52667A, Dark=#B8C4D0}" />
+
+            <!-- Fotografia -->
+            <Border
+                BackgroundColor="{AppThemeBinding Light=White, Dark=#243746}"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 14"
+                Padding="16">
+
+                <VerticalStackLayout Spacing="12" HorizontalOptions="Center">
+
+                    <Image
+                        x:Name="FotoImage"
+                        WidthRequest="120"
+                        HeightRequest="120"
+                        Aspect="AspectFill" />
+
+                    <HorizontalStackLayout Spacing="10">
+                        <Button
+                            x:Name="CameraButton"
+                            Text="Câmera"
+                            Clicked="CameraButton_Clicked"
+                            BackgroundColor="#102A43"
+                            TextColor="White" />
+
+                        <Button
+                            x:Name="GaleriaButton"
+                            Text="Galeria"
+                            Clicked="GaleriaButton_Clicked"
+                            BackgroundColor="#E76F51"
+                            TextColor="White" />
+                    </HorizontalStackLayout>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Dados pessoais -->
+            <Label
+                Text="DADOS PESSOAIS"
+                FontAttributes="Bold"
+                TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+
+            <Entry x:Name="NomeEntry" Placeholder="Nome completo" />
+            <Entry x:Name="CpfEntry" Placeholder="CPF" Keyboard="Numeric" />
+            <DatePicker x:Name="NascimentoPicker" />
+            <Entry x:Name="TelefoneEntry" Placeholder="Telefone" Keyboard="Telephone" />
+            <Entry x:Name="EmailEntry" Placeholder="E-mail" Keyboard="Email" />
+
+            <!-- Endereço -->
+            <Label
+                Text="ENDEREÇO"
+                FontAttributes="Bold"
+                TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+
+            <Picker x:Name="LogradouroPicker" Title="Selecione o logradouro" />
+            <Entry x:Name="NumeroEntry" Placeholder="Número" />
+            <Entry x:Name="ComplementoEntry" Placeholder="Complemento" />
+
+            <!-- Dados profissionais -->
+            <Label
+                Text="DADOS PROFISSIONAIS"
+                FontAttributes="Bold"
+                TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+
+            <DatePicker x:Name="AdmissaoPicker" />
+            <Picker x:Name="TipoPicker" Title="Tipo de colaborador" />
+            <Picker x:Name="VinculoPicker" Title="Vínculo profissional" />
+
+            <!-- Acesso -->
+            <Label
+                Text="ACESSO"
+                FontAttributes="Bold"
+                TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+
+            <Entry
+                x:Name="SenhaEntry"
+                Placeholder="Senha"
+                IsPassword="True" />
+
+            <Entry
+                x:Name="ConfirmarSenhaEntry"
+                Placeholder="Confirmar senha"
+                IsPassword="True" />
+
+            <!-- Ações -->
+            <Button
+                x:Name="SalvarButton"
+                Text="SALVAR COLABORADOR"
+                BackgroundColor="#E76F51"
+                TextColor="White"
+                FontAttributes="Bold"
+                CornerRadius="12"
+                HeightRequest="50"
+                Clicked="SalvarButton_Clicked" />
+
+            <Button
+                x:Name="CancelarButton"
+                Text="Cancelar"
+                BackgroundColor="#102A43"
+                TextColor="White"
+                CornerRadius="12"
+                Clicked="CancelarButton_Clicked" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

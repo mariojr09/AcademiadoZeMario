@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AcademiaDoZe.Presentation.Pages.AlunoPage"
+             Title="Cadastro de aluno"
+             BackgroundColor="{AppThemeBinding Light=#F4F7FB, Dark=#101820}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16" MaximumWidthRequest="820" HorizontalOptions="Center">
+            <Label x:Name="TituloLabel" Text="CADASTRO DE ALUNO" FontSize="24" FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+            <Label Text="Alunos • Academia do Zé" TextColor="{AppThemeBinding Light=#52667A, Dark=#B8C4D0}" />
+            <Border BackgroundColor="{AppThemeBinding Light=White, Dark=#243746}" StrokeThickness="0" StrokeShape="RoundRectangle 14" Padding="16">
+                <VerticalStackLayout Spacing="12" HorizontalOptions="Center">
+                    <Image x:Name="FotoImage" WidthRequest="120" HeightRequest="120" Aspect="AspectFill" />
+                    <HorizontalStackLayout Spacing="10">
+                        <Button Text="Câmera" Clicked="CameraButton_Clicked" BackgroundColor="#102A43" TextColor="White" />
+                        <Button Text="Galeria" Clicked="GaleriaButton_Clicked" BackgroundColor="#F26B4A" TextColor="White" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+            <Label Text="DADOS PESSOAIS" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+            <Entry x:Name="NomeEntry" Placeholder="Nome completo" />
+            <Entry x:Name="CpfEntry" Placeholder="CPF" Keyboard="Numeric" />
+            <DatePicker x:Name="NascimentoPicker" />
+            <Entry x:Name="TelefoneEntry" Placeholder="Telefone com DDD" Keyboard="Telephone" />
+            <Entry x:Name="EmailEntry" Placeholder="E-mail" Keyboard="Email" />
+            <Label Text="ENDEREÇO" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+            <Picker x:Name="LogradouroPicker" Title="Selecione o logradouro" />
+            <Entry x:Name="NumeroEntry" Placeholder="Número" />
+            <Entry x:Name="ComplementoEntry" Placeholder="Complemento" />
+            <Label Text="ACESSO" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+            <Entry x:Name="SenhaEntry" Placeholder="Senha" IsPassword="True" />
+            <Entry x:Name="ConfirmarSenhaEntry" Placeholder="Confirmar senha" IsPassword="True" />
+            <Button x:Name="SalvarButton" Text="SALVAR ALUNO" Clicked="SalvarButton_Clicked" BackgroundColor="#F26B4A"
+                    TextColor="White" FontAttributes="Bold" CornerRadius="12" HeightRequest="50" />
+            <Button Text="Cancelar" Clicked="CancelarButton_Clicked" BackgroundColor="#102A43" TextColor="White" CornerRadius="12" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

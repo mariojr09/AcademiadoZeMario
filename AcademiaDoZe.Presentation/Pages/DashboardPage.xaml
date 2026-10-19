@@ -121,7 +121,7 @@
                             Opacity="0.75" />
                     </Border.Shadow>
 
-                    <Grid RowDefinitions="Auto,Auto">
+                    <Grid>
 
                         <Image
                             Source="logo.png"
@@ -129,40 +129,7 @@
                             Margin="12,8"
                             Aspect="AspectFit"
                             HorizontalOptions="Fill"
-                            SemanticProperties.Description="Logo da Academia do Zé com o nome Mario Cesar Alves Júnior" />
-
-                        <Grid
-                            Grid.Row="1"
-                            Padding="22,13"
-                            ColumnDefinitions="Auto,*"
-                            ColumnSpacing="12"
-                            BackgroundColor="#0B263D">
-
-                            <BoxView
-                                WidthRequest="4"
-                                HeightRequest="35"
-                                CornerRadius="2"
-                                Color="#E6A52E" />
-
-                            <VerticalStackLayout
-                                Grid.Column="1"
-                                Spacing="1"
-                                VerticalOptions="Center">
-
-                                <Label
-                                    Text="Mario Cesar Alves Júnior"
-                                    FontFamily="OpenSansSemibold"
-                                    FontSize="18"
-                                    TextColor="#FFFFFF" />
-
-                                <Label
-                                    Text="Academia do Zé • Desenvolvimento de Sistemas"
-                                    FontFamily="OpenSansRegular"
-                                    FontSize="11"
-                                    TextColor="#C9D6E0" />
-
-                            </VerticalStackLayout>
-                        </Grid>
+                            SemanticProperties.Description="Logotipo da Academia do Zé com o nome MARIO CESAR ALVES JÚNIOR incorporado à imagem" />
                     </Grid>
                 </Border>
 

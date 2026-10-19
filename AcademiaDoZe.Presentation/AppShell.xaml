@@ -91,6 +91,30 @@
         Route="logradouros-page" />
     </FlyoutItem>
 
+    <!-- Menu de Colaboradores -->
+    <FlyoutItem Title="Colaboradores" Route="colaboradores">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialIcons"
+                Glyph="&#xE7EF;"
+                Color="White"
+                Size="22" />
+        </FlyoutItem.Icon>
+
+        <ShellContent
+            x:Name="ColaboradoresShellContent"
+            Title="Colaboradores"
+            Route="colaboradores-page" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Alunos" Route="alunos">
+        <FlyoutItem.Icon>
+            <FontImageSource FontFamily="MaterialIcons" Glyph="&#xE80C;" Color="White" Size="22" />
+        </FlyoutItem.Icon>
+        <ShellContent x:Name="AlunosShellContent" Title="Alunos" Route="alunos-page" />
+    </FlyoutItem>
+
+
     <FlyoutItem Title="Configurações" Route="configuracoes">
         <FlyoutItem.Icon>
             <FontImageSource

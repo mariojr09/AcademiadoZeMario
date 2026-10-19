@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:AcademiaDoZe.Presentation.Converters"
+    x:Class="AcademiaDoZe.Presentation.Pages.ColaboradorListPage"
+    Title="Colaboradores">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:FotoToImageSourceConverter
+                x:Key="FotoConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid
+        BackgroundColor="{AppThemeBinding Light=#F4F7FB, Dark=#101820}"
+        RowDefinitions="Auto,Auto,*"
+        Padding="20"
+        RowSpacing="16">
+
+        <!-- Cabeçalho -->
+        <VerticalStackLayout Grid.Row="0" Spacing="5">
+
+            <Label
+                Text="COLABORADORES"
+                FontSize="26"
+                FontAttributes="Bold"
+                TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+
+            <Label
+                Text="Gestão da equipe • Academia do Zé"
+                FontSize="13"
+                TextColor="{AppThemeBinding Light=#52667A, Dark=#B8C4D0}" />
+
+        </VerticalStackLayout>
+
+        <!-- Pesquisa e cadastro -->
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="*,Auto"
+            ColumnSpacing="10">
+
+            <SearchBar
+                x:Name="PesquisaEntry"
+                Grid.Column="0"
+                Placeholder="Pesquisar por CPF"
+                TextChanged="PesquisaEntry_TextChanged"
+                BackgroundColor="{AppThemeBinding Light=White, Dark=#243746}"
+                TextColor="{AppThemeBinding Light=#102A43, Dark=White}"
+                PlaceholderColor="{AppThemeBinding Light=#6B7C8F, Dark=#B8C4D0}" />
+
+            <Button
+                x:Name="NovoButton"
+                Grid.Column="1"
+                Text="+ Novo"
+                BackgroundColor="#E76F51"
+                TextColor="White"
+                FontAttributes="Bold"
+                CornerRadius="12"
+                Padding="15,10"
+                Clicked="NovoButton_Clicked" />
+
+        </Grid>
+
+        <!-- Lista -->
+        <CollectionView
+            x:Name="ColaboradoresCollection"
+            Grid.Row="2"
+            SelectionMode="None">
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout
+                    Padding="20,60"
+                    Spacing="12"
+                    HorizontalOptions="Center">
+
+                    <Label
+                        Text="Nenhum colaborador encontrado."
+                        FontSize="16"
+                        HorizontalTextAlignment="Center"
+                        TextColor="{AppThemeBinding Light=#52667A, Dark=#B8C4D0}" />
+
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+
+                    <Border
+                        BackgroundColor="{AppThemeBinding Light=White, Dark=#243746}"
+                        Stroke="{AppThemeBinding Light=#DFE6ED, Dark=#34495E}"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 14"
+                        Padding="12"
+                        Margin="0,0,0,10">
+
+                        <Grid
+                            ColumnDefinitions="60,*,Auto"
+                            ColumnSpacing="12">
+
+                            <Border
+                                Grid.Column="0"
+                                WidthRequest="56"
+                                HeightRequest="56"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 28"
+                                BackgroundColor="#DCE5EF">
+
+                                <Image
+                                    Source="{Binding Foto, Converter={StaticResource FotoConverter}}"
+                                    Aspect="AspectFill" />
+
+                            </Border>
+
+                            <VerticalStackLayout
+                                Grid.Column="1"
+                                VerticalOptions="Center"
+                                Spacing="4">
+
+                                <Label
+                                    Text="{Binding Nome}"
+                                    FontSize="16"
+                                    FontAttributes="Bold"
+                                    LineBreakMode="TailTruncation"
+                                    TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+
+                                <Label
+                                    Text="{Binding Cpf}"
+                                    FontSize="13"
+                                    TextColor="{AppThemeBinding Light=#52667A, Dark=#B8C4D0}" />
+
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout
+                                Grid.Column="2"
+                                Spacing="6"
+                                VerticalOptions="Center">
+
+                                <Button
+                                    Text="Editar"
+                                    FontSize="12"
+                                    BackgroundColor="#102A43"
+                                    TextColor="White"
+                                    CornerRadius="8"
+                                    Padding="10,6"
+                                    CommandParameter="{Binding Id}"
+                                    Clicked="EditarButton_Clicked" />
+
+                                <Button
+                                    Text="Excluir"
+                                    FontSize="12"
+                                    BackgroundColor="#E76F51"
+                                    TextColor="White"
+                                    CornerRadius="8"
+                                    Padding="10,6"
+                                    CommandParameter="{Binding .}"
+                                    Clicked="ExcluirButton_Clicked" />
+
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+                    </Border>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </Grid>
+
+</ContentPage>
+
+    

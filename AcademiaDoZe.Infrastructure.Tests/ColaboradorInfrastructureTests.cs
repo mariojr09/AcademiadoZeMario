@@ -249,7 +249,7 @@ public class ColaboradorInfrastructureTests : TestBase
                 id: inserido.Id,
 
                 nome:
-                    "Mario Cesar Alves Junior",
+                    "zé dos testes",
 
                 cpf:
                     inserido.Cpf.Valor,
@@ -304,6 +304,10 @@ public class ColaboradorInfrastructureTests : TestBase
         Assert.Equal(
             "200",
             noBanco.Endereco.Numero);
+
+        Assert.Equal(
+            "zé dos testes",
+            noBanco.Nome);
 
         Assert.Equal(
             ColaboradorTipo.Administrador,
