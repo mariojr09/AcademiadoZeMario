@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AcademiaDoZe.Presentation.Pages.MatriculaPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Matrícula"
+    BackgroundColor="{AppThemeBinding Light=#F4F7FB, Dark=#101820}">
+
+    <ContentPage.Resources>
+        <Style x:Key="CampoEntry" TargetType="Entry">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#F0F4F8, Dark=#34495E}" />
+            <Setter Property="TextColor" Value="{AppThemeBinding Light=#102A43, Dark=White}" />
+            <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light=#627D98, Dark=#B8C4D0}" />
+            <Setter Property="HeightRequest" Value="48" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+        </Style>
+        <Style x:Key="CampoPicker" TargetType="Picker">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#F0F4F8, Dark=#34495E}" />
+            <Setter Property="TextColor" Value="{AppThemeBinding Light=#102A43, Dark=White}" />
+            <Setter Property="HeightRequest" Value="48" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+        </Style>
+        <Style x:Key="CampoData" TargetType="DatePicker">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#F0F4F8, Dark=#34495E}" />
+            <Setter Property="TextColor" Value="{AppThemeBinding Light=#102A43, Dark=White}" />
+            <Setter Property="HeightRequest" Value="48" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="22" Spacing="14" MaximumWidthRequest="860" HorizontalOptions="Fill">
+            <Label x:Name="TituloLabel" Text="NOVA MATRÍCULA" FontFamily="OpenSansSemibold" FontSize="25"
+                   TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+            <Label Text="Selecione o aluno e registre o plano e os cuidados de saúde."
+                   FontSize="13" TextColor="{AppThemeBinding Light=#52667A, Dark=#B8C4D0}" />
+
+            <Border Padding="16" BackgroundColor="{AppThemeBinding Light=White, Dark=#243746}"
+                    Stroke="{AppThemeBinding Light=#DFE6ED, Dark=#34495E}" StrokeShape="RoundRectangle 14">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="ALUNO" FontFamily="OpenSansSemibold"
+                           TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                        <Entry x:Name="CpfEntry" Style="{StaticResource CampoEntry}"
+                               Placeholder="CPF do aluno" Keyboard="Numeric" MaxLength="14"
+                               ReturnType="Search" Completed="OnBuscarCpfClicked" />
+                        <Button Grid.Column="1" Text="Buscar CPF" Clicked="OnBuscarCpfClicked"
+                                BackgroundColor="#147D92" TextColor="White" CornerRadius="10" Padding="15,8" />
+                    </Grid>
+
+                    <Border x:Name="AlunoCard" IsVisible="False" Padding="12"
+                            BackgroundColor="{AppThemeBinding Light=#F0F4F8, Dark=#1A2B38}"
+                            Stroke="{AppThemeBinding Light=#D9E2EC, Dark=#34495E}" StrokeShape="RoundRectangle 12">
+                        <Grid ColumnDefinitions="72,*" ColumnSpacing="14">
+                            <Border WidthRequest="68" HeightRequest="68" Stroke="#147D92" StrokeThickness="2"
+                                    StrokeShape="RoundRectangle 34" BackgroundColor="#DCE5EF">
+                                <Grid>
+                                    <Label Text="AZ" HorizontalOptions="Center" VerticalOptions="Center"
+                                           FontFamily="OpenSansSemibold" TextColor="#52667A" />
+                                    <Image x:Name="AlunoFotoImage" Aspect="AspectFill" />
+                                </Grid>
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                <Label x:Name="AlunoNomeLabel" FontFamily="OpenSansSemibold" FontSize="16"
+                                       TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+                                <Label x:Name="AlunoCpfLabel" FontSize="12"
+                                       TextColor="{AppThemeBinding Light=#52667A, Dark=#B8C4D0}" />
+                                <Label x:Name="AlunoNascimentoLabel" FontSize="12"
+                                       TextColor="{AppThemeBinding Light=#52667A, Dark=#B8C4D0}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                    <Label x:Name="AlunoAjudaLabel"
+                           Text="Digite o CPF e clique em Buscar CPF para vincular um aluno."
+                           FontSize="12" TextColor="#C05621" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Padding="16" BackgroundColor="{AppThemeBinding Light=White, Dark=#243746}"
+                    Stroke="{AppThemeBinding Light=#DFE6ED, Dark=#34495E}" StrokeShape="RoundRectangle 14">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="PLANO E VIGÊNCIA" FontFamily="OpenSansSemibold"
+                           TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Plano *" FontSize="12" />
+                            <Picker x:Name="PlanoPicker" Style="{StaticResource CampoPicker}"
+                                    SelectedIndexChanged="OnPlanoOuInicioAlterado" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4">
+                            <Label Text="Início *" FontSize="12" />
+                            <DatePicker x:Name="InicioPicker" Style="{StaticResource CampoData}"
+                                        DateSelected="OnPlanoOuInicioAlterado" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="2" Spacing="4">
+                            <Label Text="Fim automático" FontSize="12" />
+                            <DatePicker x:Name="FimPicker" Style="{StaticResource CampoData}"
+                                        IsEnabled="False" />
+                        </VerticalStackLayout>
+                    </Grid>
+                    <Entry x:Name="ObjetivoEntry" Style="{StaticResource CampoEntry}"
+                           Placeholder="Objetivo da matrícula *" MaxLength="500" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Padding="16" BackgroundColor="{AppThemeBinding Light=White, Dark=#243746}"
+                    Stroke="{AppThemeBinding Light=#DFE6ED, Dark=#34495E}" StrokeShape="RoundRectangle 14">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="RESTRIÇÕES MÉDICAS" FontFamily="OpenSansSemibold"
+                           TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+                    <Label Text="Marque quantas condições forem necessárias."
+                           FontSize="12" TextColor="{AppThemeBinding Light=#71869A, Dark=#94A8BA}" />
+                    <VerticalStackLayout x:Name="RestricoesContainer" Spacing="3" />
+                    <Editor x:Name="ObservacoesEditor" Placeholder="Observações, recomendações e cuidados específicos"
+                            AutoSize="TextChanges" MinimumHeightRequest="82" MaxLength="500"
+                            BackgroundColor="{AppThemeBinding Light=#F0F4F8, Dark=#34495E}"
+                            TextColor="{AppThemeBinding Light=#102A43, Dark=White}"
+                            PlaceholderColor="{AppThemeBinding Light=#627D98, Dark=#B8C4D0}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Padding="16" BackgroundColor="{AppThemeBinding Light=White, Dark=#243746}"
+                    Stroke="{AppThemeBinding Light=#DFE6ED, Dark=#34495E}" StrokeShape="RoundRectangle 14">
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="LAUDO MÉDICO" FontFamily="OpenSansSemibold"
+                               TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+                        <Label x:Name="LaudoStatusLabel" Grid.Column="1" Text="Opcional" FontSize="12"
+                               TextColor="#71869A" VerticalOptions="Center" />
+                    </Grid>
+                    <Label x:Name="LaudoAjudaLabel"
+                           Text="Obrigatório para alunos de 12 a 16 anos e sempre que houver restrição médica."
+                           FontSize="12" TextColor="{AppThemeBinding Light=#52667A, Dark=#B8C4D0}" />
+                    <Grid ColumnDefinitions="116,*" ColumnSpacing="14">
+                        <Border WidthRequest="110" HeightRequest="110" Stroke="#BCCCDC"
+                                StrokeShape="RoundRectangle 10" BackgroundColor="#F0F4F8">
+                            <Grid>
+                                <Label Text="LAUDO" HorizontalOptions="Center" VerticalOptions="Center"
+                                       FontFamily="OpenSansSemibold" TextColor="#71869A" />
+                                <Image x:Name="LaudoImage" Aspect="AspectFill" />
+                            </Grid>
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="8" VerticalOptions="Center">
+                            <Button Text="Selecionar imagem" Clicked="OnGaleriaLaudoClicked"
+                                    BackgroundColor="#147D92" TextColor="White" CornerRadius="9" />
+                            <Button Text="Usar câmera" Clicked="OnCameraLaudoClicked"
+                                    BackgroundColor="#102A43" TextColor="White" CornerRadius="9" />
+                            <Button x:Name="RemoverLaudoButton" Text="Remover laudo" Clicked="OnRemoverLaudoClicked"
+                                    IsVisible="False" BackgroundColor="#E76F51" TextColor="White" CornerRadius="9" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Label x:Name="ErroLabel" IsVisible="False" TextColor="#B42318" FontSize="12" />
+            <ActivityIndicator x:Name="LoadingIndicator" IsVisible="False" IsRunning="False" Color="#E76F51" />
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,4,0,8">
+                <Button Text="Cancelar" Clicked="OnCancelarClicked" BackgroundColor="#102A43"
+                        TextColor="White" CornerRadius="11" HeightRequest="50" />
+                <Button x:Name="SalvarButton" Grid.Column="1" Text="Salvar matrícula" Clicked="OnSalvarClicked"
+                        BackgroundColor="#E76F51" TextColor="White" FontFamily="OpenSansSemibold"
+                        CornerRadius="11" HeightRequest="50" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

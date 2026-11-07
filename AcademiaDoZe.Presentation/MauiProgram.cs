@@ -13,6 +13,33 @@ namespace AcademiaDoZe.Presentation;
 // Mario Cesar Alves Júnior
 public static class MauiProgram
 {
+    private static string _senhaBanco = string.Empty;
+
+    public static async Task CarregarSenhaBancoAsync()
+    {
+        try
+        {
+            _senhaBanco = await SecureStorage.Default.GetAsync("DbSenha") ?? string.Empty;
+        }
+        catch
+        {
+            _senhaBanco = string.Empty;
+        }
+    }
+
+    private static string ObterConnectionString()
+    {
+        return new MySqlConnectionStringBuilder
+        {
+            Server = Preferences.Default.Get("DbServidor", "127.0.0.1"),
+            Port = 3306,
+            Database = Preferences.Default.Get("DbBanco", "db_academia_do_ze"),
+            UserID = Preferences.Default.Get("DbUsuario", string.Empty),
+            Password = _senhaBanco,
+            CharacterSet = "utf8mb4"
+        }.ConnectionString;
+    }
+
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
@@ -26,33 +53,7 @@ public static class MauiProgram
                 fonts.AddFont("MaterialIconsRound-Regular.otf", "MaterialIcons");
             });
 
-        static string ObterConnectionString()
-        {
-            string senha;
-            try
-            {
-                senha = SecureStorage.Default.GetAsync("DbSenha").GetAwaiter().GetResult() ?? string.Empty;
-            }
-            catch
-            {
-                senha = string.Empty;
-            }
-
-            var builder = new MySqlConnectionStringBuilder
-            {
-                Server = Preferences.Default.Get("DbServidor", "127.0.0.1"),
-                Port = 3306,
-                Database = Preferences.Default.Get("DbBanco", "db_academia_do_ze"),
-                UserID = Preferences.Default.Get("DbUsuario", string.Empty),
-                Password = senha,
-                CharacterSet = "utf8mb4"
-            };
-
-            return builder.ConnectionString;
-        }
-
-        // O aplicativo utiliza exclusivamente MySQL; as credenciais são informadas
-        // localmente na tela de configurações e nunca ficam gravadas no código-fonte.
+        // Repositório de Logradouros
         builder.Services.AddTransient<ILogradouroRepository>(_ =>
             new LogradouroRepository(ObterConnectionString(), DatabaseType.MySql));
 
@@ -69,14 +70,21 @@ public static class MauiProgram
 
         builder.Services.AddTransient<IAlunoService, AlunoService>();
 
+        builder.Services.AddTransient<IMatriculaRepository>(_ =>
+            new MatriculaRepository(ObterConnectionString(), DatabaseType.MySql));
+
+        builder.Services.AddTransient<IMatriculaService, MatriculaService>();
+
         // Páginas do aplicativo
         builder.Services.AddSingleton<DashboardPage>();
         builder.Services.AddSingleton<LogradourosPage>();
-        builder.Services.AddTransient<ColaboradorListPage>();
-        builder.Services.AddTransient<ColaboradorPage>();
-        builder.Services.AddTransient<AlunoListPage>();
-        builder.Services.AddTransient<AlunoPage>();
+        builder.Services.AddSingleton<ColaboradorListPage>();
+        builder.Services.AddSingleton<AlunoListPage>();
+        builder.Services.AddSingleton<MatriculaListPage>();
         builder.Services.AddTransient<LogradouroFormPage>();
+        builder.Services.AddTransient<ColaboradorPage>();
+        builder.Services.AddTransient<AlunoPage>();
+        builder.Services.AddTransient<MatriculaPage>();
         builder.Services.AddSingleton<ConfigPage>();
         builder.Services.AddSingleton<AppShell>();
 

@@ -12,6 +12,7 @@ public static class MatriculaMappingExtensions
         {
             Id = matricula.Id,
             AlunoId = matricula.Aluno.Id,
+            Aluno = matricula.Aluno.ToDto(),
             Plano = (AppMatriculaPlano)(int)matricula.Plano,
             DataInicio = matricula.DataInicio,
             DataFinal = matricula.DataFinal,

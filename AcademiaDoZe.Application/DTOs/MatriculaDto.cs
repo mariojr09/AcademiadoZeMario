@@ -8,6 +8,8 @@ public class MatriculaDto
 
     public int AlunoId { get; set; }
 
+    public AlunoDto? Aluno { get; set; }
+
     public AppMatriculaPlano Plano { get; set; }
 
     public DateOnly DataInicio { get; set; }

@@ -11,6 +11,7 @@ public partial class AppShell : Shell
         LogradourosPage logradourosPage,
         ColaboradorListPage colaboradorListPage,
         AlunoListPage alunoListPage,
+        MatriculaListPage matriculaListPage,
         ConfigPage configPage)
     {
         InitializeComponent();
@@ -20,11 +21,13 @@ public partial class AppShell : Shell
             typeof(LogradouroFormPage));
         Routing.RegisterRoute(ColaboradorPage.Route, typeof(ColaboradorPage));
         Routing.RegisterRoute(AlunoPage.Route, typeof(AlunoPage));
+        Routing.RegisterRoute(MatriculaPage.Route, typeof(MatriculaPage));
 
         DashboardShellContent.Content = dashboardPage;
         LogradourosShellContent.Content = logradourosPage;
         ColaboradoresShellContent.Content = colaboradorListPage;
         AlunosShellContent.Content = alunoListPage;
+        MatriculasShellContent.Content = matriculaListPage;
         ConfigShellContent.Content = configPage;
     }
 }

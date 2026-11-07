@@ -109,9 +109,32 @@
 
     <FlyoutItem Title="Alunos" Route="alunos">
         <FlyoutItem.Icon>
-            <FontImageSource FontFamily="MaterialIcons" Glyph="&#xE80C;" Color="White" Size="22" />
+            <FontImageSource
+                FontFamily="MaterialIcons"
+                Glyph="&#xE80C;"
+                Color="White"
+                Size="22" />
         </FlyoutItem.Icon>
-        <ShellContent x:Name="AlunosShellContent" Title="Alunos" Route="alunos-page" />
+
+        <ShellContent
+            x:Name="AlunosShellContent"
+            Title="Alunos"
+            Route="alunos-page" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Matrículas" Route="matriculas">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialIcons"
+                Glyph="&#xEFEC;"
+                Color="White"
+                Size="22" />
+        </FlyoutItem.Icon>
+
+        <ShellContent
+            x:Name="MatriculasShellContent"
+            Title="Matrículas"
+            Route="matriculas-page" />
     </FlyoutItem>
 
 

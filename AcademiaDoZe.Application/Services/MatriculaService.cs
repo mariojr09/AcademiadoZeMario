@@ -76,6 +76,10 @@ public class MatriculaService : IMatriculaService
         MatriculaDto matriculaDto,
         CancellationToken cancellationToken = default)
     {
+        matriculaDto.DataFinal = CalcularDataFinal(
+            matriculaDto.DataInicio,
+            matriculaDto.Plano);
+
         var aluno =
             await _alunoRepository.ObterPorIdAsync(
                 matriculaDto.AlunoId,
@@ -90,7 +94,7 @@ public class MatriculaService : IMatriculaService
         var matriculaVigente =
             await _matriculaRepository.ObterVigentePorAlunoAsync(
                 matriculaDto.AlunoId,
-                matriculaDto.DataInicio,
+                DateOnly.FromDateTime(DateTime.Today),
                 cancellationToken);
 
         if (matriculaVigente is not null)
@@ -131,10 +135,10 @@ public class MatriculaService : IMatriculaService
                 aluno.DataNascimento,
                 matriculaDto.DataInicio);
 
-        if (idade < 16 && laudoMedico is null)
+        if (ExigeLaudoPorIdade(idade) && laudoMedico is null)
         {
             throw new InvalidOperationException(
-                "LAUDO_MEDICO_OBRIGATORIO_MENOR_16_ANOS");
+                "LAUDO_MEDICO_OBRIGATORIO_ENTRE_12_E_16_ANOS");
         }
 
         var result =
@@ -168,6 +172,10 @@ public class MatriculaService : IMatriculaService
         MatriculaDto matriculaDto,
         CancellationToken cancellationToken = default)
     {
+        matriculaDto.DataFinal = CalcularDataFinal(
+            matriculaDto.DataInicio,
+            matriculaDto.Plano);
+
         var existente =
             await _matriculaRepository.ObterPorIdAsync(
                 matriculaDto.Id,
@@ -190,8 +198,7 @@ public class MatriculaService : IMatriculaService
                 "ALUNO_NAO_ENCONTRADO");
         }
 
-        Arquivo? laudoMedico =
-            existente.LaudoMedico;
+        Arquivo? laudoMedico = null;
 
         if (matriculaDto.LaudoMedico?.Conteudo is { Length: > 0 })
         {
@@ -223,10 +230,10 @@ public class MatriculaService : IMatriculaService
                 aluno.DataNascimento,
                 matriculaDto.DataInicio);
 
-        if (idade < 16 && laudoMedico is null)
+        if (ExigeLaudoPorIdade(idade) && laudoMedico is null)
         {
             throw new InvalidOperationException(
-                "LAUDO_MEDICO_OBRIGATORIO_MENOR_16_ANOS");
+                "LAUDO_MEDICO_OBRIGATORIO_ENTRE_12_E_16_ANOS");
         }
 
         var result =
@@ -288,5 +295,22 @@ public class MatriculaService : IMatriculaService
         }
 
         return idade;
+    }
+
+    private static bool ExigeLaudoPorIdade(int idade) =>
+        idade is >= 12 and <= 16;
+
+    private static DateOnly CalcularDataFinal(
+        DateOnly dataInicio,
+        AppMatriculaPlano plano)
+    {
+        return plano switch
+        {
+            AppMatriculaPlano.Mensal => dataInicio.AddMonths(1),
+            AppMatriculaPlano.Trimestral => dataInicio.AddMonths(3),
+            AppMatriculaPlano.Semestral => dataInicio.AddMonths(6),
+            AppMatriculaPlano.Anual => dataInicio.AddYears(1),
+            _ => throw new InvalidOperationException("PLANO_INVALIDO")
+        };
     }
 }
