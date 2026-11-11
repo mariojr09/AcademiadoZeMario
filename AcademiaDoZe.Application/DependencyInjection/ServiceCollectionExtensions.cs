@@ -14,6 +14,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IAlunoService, AlunoService>();
         services.AddScoped<IColaboradorService, ColaboradorService>();
         services.AddScoped<IMatriculaService, MatriculaService>();
+        services.AddScoped<IAcessoService, AcessoService>();
 
         return services;
     }

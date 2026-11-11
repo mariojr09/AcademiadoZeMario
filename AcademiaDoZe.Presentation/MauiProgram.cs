@@ -75,12 +75,21 @@ public static class MauiProgram
 
         builder.Services.AddTransient<IMatriculaService, MatriculaService>();
 
+        builder.Services.AddTransient<IAcessoAlunoRepository>(_ =>
+            new AcessoAlunoRepository(ObterConnectionString(), DatabaseType.MySql));
+
+        builder.Services.AddTransient<IAcessoColaboradorRepository>(_ =>
+            new AcessoColaboradorRepository(ObterConnectionString(), DatabaseType.MySql));
+
+        builder.Services.AddTransient<IAcessoService, AcessoService>();
+
         // Páginas do aplicativo
         builder.Services.AddSingleton<DashboardPage>();
         builder.Services.AddSingleton<LogradourosPage>();
         builder.Services.AddSingleton<ColaboradorListPage>();
         builder.Services.AddSingleton<AlunoListPage>();
         builder.Services.AddSingleton<MatriculaListPage>();
+        builder.Services.AddSingleton<AcessoPage>();
         builder.Services.AddTransient<LogradouroFormPage>();
         builder.Services.AddTransient<ColaboradorPage>();
         builder.Services.AddTransient<AlunoPage>();

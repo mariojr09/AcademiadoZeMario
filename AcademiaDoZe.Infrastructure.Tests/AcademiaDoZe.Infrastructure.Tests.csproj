@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AcademiadoZE.Domain\AcademiadoZE.Domain.csproj" />
+    <ProjectReference Include="..\AcademiaDoZe.Application\AcademiaDoZe.Application.csproj" />
     <ProjectReference Include="..\AcademiaDoZe.Infrastructure\AcademiaDoZe.Infrastructure.csproj" />
   </ItemGroup>
 

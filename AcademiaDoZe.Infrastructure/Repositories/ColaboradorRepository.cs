@@ -406,7 +406,7 @@ public class ColaboradorRepository : BaseRepository, IColaboradorRepository
         return Convert.ToInt32(resultado) > 0;
     }
 
-    private static Colaborador Map(DbDataReader reader)
+    public static Colaborador Map(DbDataReader reader)
     {
         int idLogradouro =
             reader.GetInt32Value("id_logradouro");

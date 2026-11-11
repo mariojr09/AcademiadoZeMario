@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:AcademiaDoZe.Presentation.Converters"
+    x:Class="AcademiaDoZe.Presentation.Pages.AcessoPage"
+    Title="Controle de acesso"
+    BackgroundColor="{AppThemeBinding Light=#F4F7FB, Dark=#101820}">
+
+    <ContentPage.Resources>
+        <converters:FotoToImageSourceConverter x:Key="FotoConverter" />
+    </ContentPage.Resources>
+
+    <ScrollView Orientation="Vertical" VerticalScrollBarVisibility="Always">
+    <Grid Padding="20" RowDefinitions="Auto,Auto,420" RowSpacing="16" MaximumWidthRequest="1000" HorizontalOptions="Fill">
+        <VerticalStackLayout Spacing="3">
+            <Label Text="CONTROLE DE ACESSO" FontSize="26" FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+            <Label Text="Registre entradas e saídas de alunos e colaboradores"
+                   TextColor="{AppThemeBinding Light=#52667A, Dark=#B8C4D0}" />
+        </VerticalStackLayout>
+
+        <Border Grid.Row="1" Padding="20" Stroke="{AppThemeBinding Light=#DFE6ED, Dark=#34495E}"
+                BackgroundColor="{AppThemeBinding Light=White, Dark=#243746}" StrokeShape="RoundRectangle 16">
+            <VerticalStackLayout Spacing="14">
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                    <Button x:Name="AlunoButton" Text="Aluno" Clicked="AlunoButton_Clicked"
+                            BackgroundColor="#102A43" TextColor="White" CornerRadius="10" />
+                    <Button x:Name="ColaboradorButton" Grid.Column="1" Text="Colaborador" Clicked="ColaboradorButton_Clicked"
+                            BackgroundColor="#DCE5EF" TextColor="#102A43" CornerRadius="10" />
+                </Grid>
+
+                <Label x:Name="SelecaoLabel" Text="Selecione o aluno" FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+                <Picker x:Name="PessoaPicker" Title="Escolha uma pessoa" ItemDisplayBinding="{Binding Descricao}"
+                        SelectedIndexChanged="PessoaPicker_SelectedIndexChanged"
+                        BackgroundColor="{AppThemeBinding Light=#F4F7FB, Dark=#1A2A36}"
+                        TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+
+                <Border Padding="10" Stroke="{AppThemeBinding Light=#DFE6ED, Dark=#34495E}"
+                        BackgroundColor="{AppThemeBinding Light=#F8FAFC, Dark=#1A2A36}"
+                        StrokeShape="RoundRectangle 12"
+                        BindingContext="{Binding Source={x:Reference PessoaPicker}, Path=SelectedItem}">
+                    <Grid ColumnDefinitions="56,*" ColumnSpacing="12">
+                        <Border WidthRequest="52" HeightRequest="52" StrokeThickness="0"
+                                BackgroundColor="#DCE5EF" StrokeShape="RoundRectangle 26">
+                            <Image Source="{Binding Foto, Converter={StaticResource FotoConverter}}" Aspect="AspectFill" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                            <Label Text="{Binding Nome}" FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+                            <Label Text="{Binding CadastroDescricao}" FontSize="12" TextColor="#147D92" />
+                            <Label Text="{Binding Cpf, StringFormat='CPF {0}'}" FontSize="12"
+                                   TextColor="{AppThemeBinding Light=#52667A, Dark=#B8C4D0}" />
+                            <Label Text="{Binding DetalhesProfissionais}" FontSize="12" TextColor="#B7791F" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <Border x:Name="ResumoColaboradorBorder" IsVisible="False" Padding="12"
+                        Stroke="#F2B84B" BackgroundColor="{AppThemeBinding Light=#FFFAEB, Dark=#302A1B}"
+                        StrokeShape="RoundRectangle 12">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="RESUMO DIÁRIO DO COLABORADOR" FontSize="11" FontAttributes="Bold"
+                               CharacterSpacing="1.2" TextColor="#B7791F" />
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                            <VerticalStackLayout>
+                                <Label Text="Trabalhado" FontSize="11" TextColor="{AppThemeBinding Light=#52667A, Dark=#B8C4D0}" />
+                                <Label x:Name="HorasTrabalhadasLabel" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1">
+                                <Label Text="Jornada prevista" FontSize="11" TextColor="{AppThemeBinding Light=#52667A, Dark=#B8C4D0}" />
+                                <Label x:Name="JornadaPrevistaLabel" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="2">
+                                <Label Text="Saldo" FontSize="11" TextColor="{AppThemeBinding Light=#52667A, Dark=#B8C4D0}" />
+                                <Label x:Name="SaldoHorasLabel" FontAttributes="Bold" TextColor="#B7791F" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label x:Name="SituacaoLabel" Text="Aguardando seleção" FontSize="13"
+                       TextColor="{AppThemeBinding Light=#52667A, Dark=#B8C4D0}" />
+
+                <Button x:Name="RegistrarButton" Text="Registrar entrada" Clicked="RegistrarButton_Clicked"
+                        IsEnabled="False" BackgroundColor="#F2B84B" TextColor="#102A43"
+                        FontAttributes="Bold" CornerRadius="12" HeightRequest="50" />
+
+                <Border x:Name="MensagemBorder" IsVisible="False" Padding="12" StrokeThickness="0"
+                        BackgroundColor="#DDF3F5" StrokeShape="RoundRectangle 10">
+                    <Label x:Name="MensagemLabel" TextColor="#102A43" />
+                </Border>
+            </VerticalStackLayout>
+        </Border>
+
+        <Grid Grid.Row="2" RowDefinitions="Auto,*" RowSpacing="10">
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Text="Acessos registrados hoje" FontSize="18" FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light=#102A43, Dark=White}" VerticalOptions="Center" />
+                <Button Grid.Column="1" Text="Atualizar" Clicked="AtualizarButton_Clicked"
+                        BackgroundColor="#147D92" TextColor="White" CornerRadius="9" />
+            </Grid>
+
+            <CollectionView x:Name="AcessosCollection" Grid.Row="1" SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <Label Text="Nenhum acesso registrado hoje." Padding="20,40"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{AppThemeBinding Light=#52667A, Dark=#B8C4D0}" />
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="12" Margin="0,0,0,8" Stroke="{AppThemeBinding Light=#DFE6ED, Dark=#34495E}"
+                                BackgroundColor="{AppThemeBinding Light=White, Dark=#243746}" StrokeShape="RoundRectangle 12">
+                            <Grid ColumnDefinitions="52,*,Auto" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="10">
+                                <Border Grid.RowSpan="4" WidthRequest="46" HeightRequest="46" StrokeThickness="0"
+                                        BackgroundColor="#DCE5EF" StrokeShape="RoundRectangle 23">
+                                    <Image Source="{Binding Foto, Converter={StaticResource FotoConverter}}" Aspect="AspectFill" />
+                                </Border>
+                                <Label Grid.Column="1" Text="{Binding Nome}" FontAttributes="Bold"
+                                       TextColor="{AppThemeBinding Light=#102A43, Dark=White}" />
+                                <Label Grid.Column="2" Text="{Binding TipoEVinculoDescricao}" FontSize="12" TextColor="#147D92" />
+                                <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding CadastroDescricao}" FontSize="12"
+                                       TextColor="#147D92" />
+                                <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding HorarioDescricao}" FontSize="12"
+                                       TextColor="{AppThemeBinding Light=#52667A, Dark=#B8C4D0}" />
+                                <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding PermanenciaDescricao}" FontSize="12"
+                                       TextColor="#B7791F" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </Grid>
+    </ScrollView>
+</ContentPage>

@@ -9,7 +9,11 @@ public class AcessoAluno : Entity
     public DateTime DataHoraChegada { get; private set; }
     public DateTime? DataHoraSaida { get; private set; }
 
-    
+    public TimeSpan? TempoPermanencia =>
+        DataHoraSaida.HasValue
+            ? DataHoraSaida.Value - DataHoraChegada
+            : null;
+
     private AcessoAluno(int id, Aluno aluno, DateTime dataHoraChegada, DateTime? dataHoraSaida)
         : base(id)
     {

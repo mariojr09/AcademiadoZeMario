@@ -12,6 +12,7 @@ public partial class AppShell : Shell
         ColaboradorListPage colaboradorListPage,
         AlunoListPage alunoListPage,
         MatriculaListPage matriculaListPage,
+        AcessoPage acessoPage,
         ConfigPage configPage)
     {
         InitializeComponent();
@@ -28,6 +29,7 @@ public partial class AppShell : Shell
         ColaboradoresShellContent.Content = colaboradorListPage;
         AlunosShellContent.Content = alunoListPage;
         MatriculasShellContent.Content = matriculaListPage;
+        AcessosShellContent.Content = acessoPage;
         ConfigShellContent.Content = configPage;
     }
 }

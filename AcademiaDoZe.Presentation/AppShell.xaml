@@ -137,6 +137,13 @@
             Route="matriculas-page" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Controle de acesso" Route="acessos">
+        <FlyoutItem.Icon>
+            <FontImageSource FontFamily="MaterialIcons" Glyph="&#xE897;" Color="White" Size="22" />
+        </FlyoutItem.Icon>
+        <ShellContent x:Name="AcessosShellContent" Title="Controle de acesso" Route="acessos-page" />
+    </FlyoutItem>
+
 
     <FlyoutItem Title="Configurações" Route="configuracoes">
         <FlyoutItem.Icon>

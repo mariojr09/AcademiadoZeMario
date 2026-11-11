@@ -9,7 +9,11 @@ public class AcessoColaborador : Entity
     public DateTime DataHoraChegada { get; private set; }
     public DateTime? DataHoraSaida { get; private set; }
 
- 
+    public TimeSpan? TempoPermanencia =>
+        DataHoraSaida.HasValue
+            ? DataHoraSaida.Value - DataHoraChegada
+            : null;
+
     private AcessoColaborador(int id, Colaborador colaborador, DateTime dataHoraChegada, DateTime? dataHoraSaida)
         : base(id)
     {

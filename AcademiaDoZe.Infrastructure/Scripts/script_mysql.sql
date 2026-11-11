@@ -77,8 +77,9 @@ CREATE TABLE IF NOT EXISTS tb_acesso (
     id_acesso INT AUTO_INCREMENT NOT NULL,
     pessoa_tipo INT NOT NULL,
     pessoa_id INT NOT NULL,
-    data_hora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    data_hora_chegada DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    data_hora_saida DATETIME NULL,
     PRIMARY KEY (id_acesso),
     INDEX ix_tb_acesso_pessoa (pessoa_tipo, pessoa_id),
-    INDEX ix_tb_acesso_data_hora (data_hora)
+    INDEX ix_tb_acesso_chegada (data_hora_chegada)
 ) ENGINE=InnoDB;

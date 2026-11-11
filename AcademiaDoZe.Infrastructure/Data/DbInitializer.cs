@@ -62,14 +62,16 @@ public static class DbInitializer
         {
             ["tb_logradouro"] = ["id_logradouro", "cep", "nome", "bairro", "cidade", "estado", "pais"],
             ["tb_aluno"] = ["id_aluno", "cpf", "nome", "nascimento", "telefone", "email", "logradouro_id", "numero", "complemento", "senha", "foto"],
-            ["tb_colaborador"] = ["id_colaborador", "cpf", "nome", "nascimento", "telefone", "email", "logradouro_id", "numero", "complemento", "senha", "foto", "admissao", "tipo", "vinculo"]
+            ["tb_colaborador"] = ["id_colaborador", "cpf", "nome", "nascimento", "telefone", "email", "logradouro_id", "numero", "complemento", "senha", "foto", "admissao", "tipo", "vinculo"],
+            ["tb_matricula"] = ["id_matricula", "aluno_id", "plano", "data_inicio", "data_fim", "objetivo", "restricao_medica", "obs_restricao", "laudo_medico"],
+            ["tb_acesso"] = ["id_acesso", "pessoa_tipo", "pessoa_id", "data_hora_chegada", "data_hora_saida"]
         };
 
         const string sql = """
             SELECT TABLE_NAME, COLUMN_NAME
             FROM INFORMATION_SCHEMA.COLUMNS
             WHERE TABLE_SCHEMA = DATABASE()
-              AND TABLE_NAME IN ('tb_logradouro', 'tb_aluno', 'tb_colaborador')
+              AND TABLE_NAME IN ('tb_logradouro', 'tb_aluno', 'tb_colaborador', 'tb_matricula', 'tb_acesso')
             """;
 
         await using var command = DbProvider.CreateCommand(sql, connection);

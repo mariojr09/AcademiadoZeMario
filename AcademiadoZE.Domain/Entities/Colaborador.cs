@@ -16,7 +16,11 @@ public class Colaborador : Pessoa
     public ColaboradorTipo Tipo { get; private set; }
     public ColaboradorVinculo Vinculo { get; private set; }
 
-    
+    public TimeSpan JornadaDiaria =>
+        Vinculo == ColaboradorVinculo.Clt
+            ? TimeSpan.FromHours(8)
+            : TimeSpan.FromHours(6);
+
     private Colaborador(
         int id, string nome, Cpf cpf, DateOnly dataNascimento, Telefone telefone,
         Email email, Endereco endereco, Senha senha, Arquivo? foto,
